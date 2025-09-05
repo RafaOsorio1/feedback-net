@@ -110,7 +110,10 @@ export default function RootLayout({ children }) {
               <p className="text-white">Resolucion CRC 6242</p>
             </div>
           </section>
-          <section></section>
+          <section>
+            <p>© 2024 FeedbackNet. Todos los derechos reservados. </p>
+            <p>© 2024 FeedbackNet. Todos los derechos reservados. </p>
+          </section>
         </footer>
       </body>
     </html>
