@@ -1,4 +1,4 @@
-import { ViewToggle } from "./components/viewToggle";
+import { ViewToggle } from './components/viewToggle';
 
 export default function Home() {
   return (

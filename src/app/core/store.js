@@ -1,6 +1,6 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 export const useStore = create((set) => ({
-  initialView: "form",
+  initialView: 'form',
   setInitialView: (view) => set({ initialView: view }),
 }));
