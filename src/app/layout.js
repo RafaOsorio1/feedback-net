@@ -1,13 +1,8 @@
-import { Wifi, Phone, Mail } from 'lucide-react';
+import { Mail, Phone, Wifi } from 'lucide-react';
 
+import { Clock8, MailIcon, MapPinnedIcon } from 'lucide-react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { NotebookPen } from 'lucide-react';
-import { Search } from 'lucide-react';
-import { NotebookPenIcon } from 'lucide-react';
-import { MapPinnedIcon } from 'lucide-react';
-import { Clock8 } from 'lucide-react';
-import { MailIcon } from 'lucide-react';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -51,11 +46,13 @@ export default function RootLayout({ children }) {
             <LayoutItem
               Icon={<Phone className="text-gray-600" />}
               label1="01 8000 123 456"
+              label={undefined}
             />
 
             <LayoutItem
               Icon={<MailIcon className="text-gray-600" />}
               label1="soporte@feedbacknet.co"
+              label={undefined}
             />
           </div>
         </header>
@@ -87,21 +84,25 @@ export default function RootLayout({ children }) {
                 <LayoutItem
                   Icon={<Phone className="text-white" />}
                   label="01 8000 123 456"
+                  label1={undefined}
                 />
 
                 <LayoutItem
                   Icon={<Mail className="text-white" />}
                   label="soporte@feedbacknet.co"
+                  label1={undefined}
                 />
 
                 <LayoutItem
                   Icon={<MapPinnedIcon className="text-white" />}
                   label="Bogota, Colombia"
+                  label1={undefined}
                 />
 
                 <LayoutItem
                   Icon={<Clock8 className="text-white" />}
                   label="Lun - Vie: 8:00 AM - 6:00 PM"
+                  label1={undefined}
                 />
               </div>
             </section>
