@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="flex flex-row w-full justify-between px-16 py-4 items-center border-b-2 border-solid border-gray-700">
+        <header className="flex flex-row w-full justify-between px-16 py-4 items-center border-b-1 border-solid border-gray-200">
           <div className="flex flex-row gap-4 items-center">
             <div className="bg-blue-600 text-white w-10 h-10 flex justify-center items-center rounded-lg">
               <Wifi className="text-[45px]" />
@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
           </div>
           <div className="flex flex-row items-center gap-10">
             <LayoutItem
-              Icon={<Phone className="text-gray-600" />}
+              Icon={<Phone className="text-gray-600 " />}
               label1="01 8000 123 456"
               label={undefined}
             />
@@ -135,7 +135,7 @@ function LayoutItem({ Icon, label, label1 }) {
     <div className="flex flex-row gap-1.5">
       {Icon}
       <p className="text-white">{label}</p>
-      <p className="text-gray-600 font-bold text-[18px]">{label1}</p>
+      <p className="text-gray-600 font-semibold text-[18px]">{label1}</p>
     </div>
   );
 }
