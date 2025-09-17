@@ -1,17 +1,26 @@
-export function InputField({ icon, label, name, placeholder }) {
+import { TextField } from '@radix-ui/themes';
+
+export function InputField({
+  label,
+  icon,
+  required = false,
+  className = '',
+  containerClassName = '',
+  ...props
+}) {
   return (
-    <div className="w-full max-w-4xl p-4 mx-auto flex flex-col pb-2 gap-2 bg-white ">
-      <div className="flex-row">
-        <div className="flex flex-row gap-2  ">
-          {icon}
-          <label className="text-left mb-2">{label}</label>
-        </div>
-        <input
-          name={name}
-          placeholder={placeholder}
-          className="gap-2 border-gray-400 border-solid border-2 w-96 p-2 rounded-sm "
-        />
-      </div>
+    <div className={`space-y-2 ${containerClassName}`}>
+      {label && (
+        <label
+          className={`block text-base font-semibold ${required ? 'after:content-["*"] after:ml-1 after:text-red-500' : ''} mb-2`}
+          htmlFor={props.id || props.name}
+        >
+          {label}
+        </label>
+      )}
+      <TextField.Root size="3" radius="large" className={className} {...props}>
+        {icon && <TextField.Slot>{icon}</TextField.Slot>}
+      </TextField.Root>
     </div>
   );
 }

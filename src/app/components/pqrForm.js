@@ -1,4 +1,10 @@
+'use client';
+
+import { FormProvider } from 'react-hook-form';
+import { usePqrForm } from '../core/hooks/pqrForm';
+
 export function PqrForm({ children }) {
+  const { form } = usePqrForm();
   return (
     <section className="bg-gray-200">
       <div className="max-w-4xl p-4 mx-auto">
@@ -9,7 +15,9 @@ export function PqrForm({ children }) {
             sugerencia{' '}
           </p>
         </div>
-        <div className="bg-white">{children} </div>
+        <FormProvider {...form}>
+          <div className="bg-white">{children} </div>
+        </FormProvider>
       </div>
     </section>
   );
