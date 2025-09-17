@@ -1,3 +1,5 @@
+'use client';
+
 import {
   FileText,
   MailIcon,
@@ -7,12 +9,15 @@ import {
   WifiIcon,
 } from 'lucide-react';
 import { Fragment } from 'react';
+import { Controller } from 'react-hook-form';
 import { CardContainer } from './components/cards';
 import { InputField } from './components/input';
 import { PqrForm } from './components/pqrForm';
 import { ViewToggle } from './components/viewToggle';
+import { usePqrForm } from './core/hooks/pqrForm';
 
 export default function Home() {
+  const { form } = usePqrForm();
   return (
     <Fragment>
       <ViewToggle />
@@ -39,43 +44,65 @@ export default function Home() {
           <h4 className="font-semibold text-2xl p-2">Sus Datos de Contacto</h4>
           <div className="border-b-1 mb-3 border-b-gray-200"></div>
         </div>
+        <div className="grid grid-cols-2 gap-4 m-4">
+          <Controller
+            name="name"
+            control={form.control}
+            render={({ field }) => (
+              <InputField
+                icon={<UserRound />}
+                label="Nombre del Usuario"
+                required={true}
+                placeholder="Su nombre completo"
+                className="col-span-1"
+                {...field}
+              />
+            )}
+          />
 
-        <div className="grid grid-cols-2 gap-0.5">
-          <div className="col-span-1">
-            <InputField
-              icon={<UserRound />}
-              name={'Nombre del usuario'}
-              label={'Nombre del Usuario'}
-              placeholder={'Su nombre completo'}
-            />
-          </div>
+          <Controller
+            name="email"
+            control={form.control}
+            render={({ field }) => (
+              <InputField
+                icon={<MailIcon />}
+                label="Correo Electronico"
+                required={true}
+                placeholder="su.email@ejemplo.com"
+                className="col-span-1"
+                {...field}
+              />
+            )}
+          />
 
-          <div className="col-span-1 ">
-            <InputField
-              icon={<MailIcon />}
-              name={'Correo Electronico'}
-              label={'Correo Electronico'}
-              placeholder={'su.email@ejemplo.com'}
-            />
-          </div>
+          <Controller
+            name="phone"
+            control={form.control}
+            render={({ field }) => (
+              <InputField
+                icon={<Phone />}
+                label="Telefono Celular"
+                required={true}
+                placeholder="3001234567"
+                className="col-span-1"
+                {...field}
+              />
+            )}
+          />
 
-          <div className="col-span-1">
-            <InputField
-              icon={<Phone />}
-              name={'Telefono Celular'}
-              label={'Telefono Celular'}
-              placeholder={'3001234567'}
-            />
-          </div>
-
-          <div className="col-span-1">
-            <InputField
-              icon={<MapPin />}
-              name={'Direccion'}
-              label={'Direccion (opcional)'}
-              placeholder={'Calle 123 # 45-67 Barrio, Ciudad'}
-            />
-          </div>
+          <Controller
+            name="address"
+            control={form.control}
+            render={({ field }) => (
+              <InputField
+                icon={<MapPin />}
+                label="Direccion (opcional)"
+                placeholder="Calle 123 # 45-67 Barrio, Ciudad"
+                className="col-span-1"
+                {...field}
+              />
+            )}
+          />
         </div>
 
         <section className="px-5 ">
