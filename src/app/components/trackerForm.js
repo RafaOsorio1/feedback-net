@@ -1,8 +1,8 @@
 'use client';
 
-import { usePqrForm } from '../core/hooks/pqrForm';
+import { usePqrForm } from '../core/hooks/usePqrForm';
 
-export function PqrForm({ children }) {
+export function TrackerForm({ children }) {
   const { form } = usePqrForm();
   return (
     <section className="bg-gray-200">
@@ -16,6 +16,7 @@ export function PqrForm({ children }) {
           </p>
         </div>
       </div>
+      {children}
     </section>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { FormProvider } from 'react-hook-form';
-import { usePqrForm } from '../core/hooks/pqrForm';
+import { usePqrForm } from '../core/hooks/usePqrForm';
 
 export function PqrForm({ children }) {
   const { form } = usePqrForm();
