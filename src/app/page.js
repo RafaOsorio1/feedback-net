@@ -2,11 +2,11 @@ import {
   FileText,
   MailIcon,
   MapPin,
+  MessageCircle,
   Phone,
   UserRound,
   WifiIcon,
 } from 'lucide-react';
-import { Fragment } from 'react';
 import { CardContainer } from './components/cards';
 import { InputField } from './components/input';
 import { PqrForm } from './components/pqrForm';
@@ -14,7 +14,7 @@ import { ViewToggle } from './components/viewToggle';
 
 export default function Home() {
   return (
-    <Fragment>
+    <section className="w-full">
       <ViewToggle />
       <section className="shadow-sm border-b border-gray-200 py-2">
         <div className="max-w-4xl p-4 mx-auto">
@@ -83,13 +83,32 @@ export default function Home() {
             Detalles de su Solicitud
           </h4>
           <div className="border-b-1 mb-6 border-b-gray-200"></div>
-          <div className="flex row gap-2 ">
-            <FileText />
-            <label>Asunto *</label>
-            <input placeholder="Resumen breve de su solicitud"></input>
+
+          <div className=" items-center">
+            <div className=" flex flex-row gap-2 mb-2">
+              <FileText />
+              <label>Asunto *</label>
+            </div>
+            <textarea
+              placeholder="Resumen breve de su solicitud"
+              className="border-solid border-1 border-gray-400 gap-4 rounded-lg p-2 w-full"
+            ></textarea>
+
+            <div className=" flex flex-row gap-2 mt-4 mb-2">
+              <MessageCircle />
+              <label>Descripción Detallada *</label>
+            </div>
+            <textarea
+              placeholder="Describa detalladamente su solicitud, problema o sugerencia. Incluya fechas, numeros de contacto, y cualquier informacion relevante..."
+              className="border-solid border-1 border-gray-400 gap-3 rounded-lg p-3 w-full mb-4"
+            ></textarea>
           </div>
+
+          <p className="text-gray-500">
+            Minimo 20 caracteres. Sea especifico para una mejor atención.
+          </p>
         </section>
       </PqrForm>
-    </Fragment>
+    </section>
   );
 }
