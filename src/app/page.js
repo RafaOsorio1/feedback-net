@@ -18,6 +18,7 @@ import { usePqrForm } from './core/hooks/pqrForm';
 
 export default function Home() {
   const { form } = usePqrForm();
+
   return (
     <section className="w-full">
       <ViewToggle />
@@ -39,7 +40,6 @@ export default function Home() {
       </section>
       <PqrForm>
         <CardContainer />
-
         <div className="px-5 ">
           <h4 className="font-semibold text-2xl p-2">Sus Datos de Contacto</h4>
           <div className="border-b-1 mb-3 border-b-gray-200"></div>
@@ -112,14 +112,19 @@ export default function Home() {
           <div className="border-b-1 mb-6 border-b-gray-200"></div>
 
           <div className=" items-center">
-            <div className=" flex flex-row gap-2 mb-2">
-              <FileText />
-              <label>Asunto *</label>
-            </div>
-            <textarea
-              placeholder="Resumen breve de su solicitud"
-              className="border-solid border-1 border-gray-400 gap-4 rounded-lg p-2 w-full"
-            ></textarea>
+            <Controller
+              name="subject"
+              control={form.control}
+              render={({ field }) => (
+                <InputField
+                  icon={<FileText />}
+                  label="Asunto"
+                  required={true}
+                  placeholder="Resumen breve de su solicitud"
+                  {...field}
+                />
+              )}
+            />
 
             <div className=" flex flex-row gap-2 mt-4 mb-2">
               <MessageCircle />
