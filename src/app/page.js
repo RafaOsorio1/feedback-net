@@ -118,7 +118,7 @@ export default function Home() {
             </div>
             <textarea
               placeholder="Resumen breve de su solicitud"
-              className="border-solid border-1 border-gray-400 gap-4 rounded-lg p-2 w-full"
+              className="border-solid border-1 border-gray-400 gap-4 rounded-lg p-3 w-full"
             ></textarea>
 
             <div className=" flex flex-row gap-2 mt-4 mb-2">
@@ -127,13 +127,37 @@ export default function Home() {
             </div>
             <textarea
               placeholder="Describa detalladamente su solicitud, problema o sugerencia. Incluya fechas, numeros de contacto, y cualquier informacion relevante..."
-              className="border-solid border-1 border-gray-400 gap-3 rounded-lg p-3 w-full mb-4"
+              className="border-solid border-1 border-gray-400 gap-4 rounded-lg p-3 w-full mb-2"
             ></textarea>
           </div>
 
-          <p className="text-gray-500">
-            Minimo 20 caracteres. Sea especifico para una mejor atención.
+          <p className="text-gray-600 mb-4">
+            Sea especifico para una mejor atención.
           </p>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h4 className="font-semibold text-blue-900 mb-3">
+              Información Importante
+            </h4>
+            <ul className="text-sm text-blue-800 space-y-2">
+              <li>
+                • Su solicitud será radicada automáticamente y recibirá un
+                Código Único de Notificación (CUN)
+              </li>
+              <li>
+                • El tiempo máximo de respuesta es de 15 días hábiles según la
+                Resolución CRC 6242 de 2021
+              </li>
+              <li>
+                • Recibirá notificaciones por email sobre el estado de su
+                solicitud
+              </li>
+              <li>
+                • Sus datos personales serán tratados conforme a la Ley 1581 de
+                2012
+              </li>
+            </ul>
+          </div>
         </section>
       </PqrForm>
     </section>
