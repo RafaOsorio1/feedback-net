@@ -20,7 +20,7 @@ export function Card({ checkboxName, title, description, className }) {
 export function CardContainer() {
   return (
     <section className="p-5">
-      <h4 className="font-medium mb-5 text-lg">Tipo de Solicitud *</h4>
+      <h4 className="font-medium mb-4 text-2xl">Tipo de Solicitud *</h4>
       <div className="grid grid-cols-2 grid-rows-2 gap-4">
         <Card
           title="Petición"

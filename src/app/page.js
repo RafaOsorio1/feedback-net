@@ -1,4 +1,11 @@
-import { MailIcon, MapPin, Phone, UserRound, WifiIcon } from 'lucide-react';
+import {
+  FileText,
+  MailIcon,
+  MapPin,
+  Phone,
+  UserRound,
+  WifiIcon,
+} from 'lucide-react';
 import { Fragment } from 'react';
 import { CardContainer } from './components/cards';
 import { InputField } from './components/input';
@@ -27,33 +34,61 @@ export default function Home() {
       </section>
       <PqrForm>
         <CardContainer />
-        <InputField
-          icon={<UserRound />}
-          name={'Nombre del usuario'}
-          label={'Nombre del Usuario'}
-          placeholder={'Su nombre completo'}
-        />
 
-        <InputField
-          icon={<Phone />}
-          name={'Telefono Celular'}
-          label={'Telefono Celular'}
-          placeholder={'3001234567'}
-        />
+        <div className="px-5 ">
+          <h4 className="font-semibold text-2xl p-2">Sus Datos de Contacto</h4>
+          <div className="border-b-1 mb-3 border-b-gray-200"></div>
+        </div>
 
-        <InputField
-          icon={<MailIcon />}
-          name={'Correo Electronico'}
-          label={'Correo Electronico'}
-          placeholder={'su.email@ejemplo.com'}
-        />
+        <div className="grid grid-cols-2 gap-0.5">
+          <div className="col-span-1">
+            <InputField
+              icon={<UserRound />}
+              name={'Nombre del usuario'}
+              label={'Nombre del Usuario'}
+              placeholder={'Su nombre completo'}
+            />
+          </div>
 
-        <InputField
-          icon={<MapPin />}
-          name={'Direccion'}
-          label={'Direccion (opcional)'}
-          placeholder={'Calle 123 # 45-67 Barrio, Ciudad'}
-        />
+          <div className="col-span-1 ">
+            <InputField
+              icon={<MailIcon />}
+              name={'Correo Electronico'}
+              label={'Correo Electronico'}
+              placeholder={'su.email@ejemplo.com'}
+            />
+          </div>
+
+          <div className="col-span-1">
+            <InputField
+              icon={<Phone />}
+              name={'Telefono Celular'}
+              label={'Telefono Celular'}
+              placeholder={'3001234567'}
+            />
+          </div>
+
+          <div className="col-span-1">
+            <InputField
+              icon={<MapPin />}
+              name={'Direccion'}
+              label={'Direccion (opcional)'}
+              placeholder={'Calle 123 # 45-67 Barrio, Ciudad'}
+            />
+          </div>
+        </div>
+
+        <section className="px-5 ">
+          <h4 className="font-semibold text-2xl p-2">
+            Detalles de su Solicitud
+          </h4>
+          <div className="border-b-1 mb-6 border-b-gray-200"></div>
+          <div className="flex row gap-2 ">
+            <FileText />
+            <label>Asunto *</label>
+            <input placeholder="Resumen breve de su solicitud"></input>
+          </div>
+        </section>
       </PqrForm>
     </Fragment>
   );
