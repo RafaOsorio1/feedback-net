@@ -2,12 +2,13 @@ import { TextField } from '@radix-ui/themes';
 
 export function InputField({
   label,
-  icon,
+
   required = false,
   className = '',
   containerClassName = '',
   ...props
 }) {
+  const { icon } = props;
   return (
     <div className={`space-y-2 ${containerClassName}`}>
       {label && (

@@ -16,7 +16,7 @@ export function PqrForm({ children }) {
           </p>
         </div>
         <FormProvider {...form}>
-          <div className="bg-white">{children} </div>
+          <div className="bg-white rounded-b-lg shadow-xl p-3">{children} </div>
         </FormProvider>
       </div>
     </section>

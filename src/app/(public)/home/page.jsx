@@ -6,17 +6,19 @@ import {
   MapPin,
   MessageCircle,
   Phone,
+  Search,
+  Send,
   UserRound,
   WifiIcon,
 } from 'lucide-react';
 import { Controller } from 'react-hook-form';
-import { CardContainer } from './components/cards';
-import { InputField } from './components/input';
-import { PqrForm } from './components/pqrForm';
-import { TrackerForm } from './components/trackerForm';
-import { ViewToggle } from './components/viewToggle';
-import { usePqrForm } from './core/hooks/usePqrForm';
-import { useStore } from './core/store';
+import { CardContainer } from '../../components/cards';
+import { InputField } from '../../components/input';
+import { PqrForm } from '../../components/pqrForm';
+import { CustomButton, TrackerForm } from '../../components/trackerForm';
+import { ViewToggle } from '../../components/viewToggle';
+import { usePqrForm } from '../../core/hooks/usePqrForm';
+import { useStore } from '../../core/store';
 
 export default function Home() {
   const { form } = usePqrForm();
@@ -171,9 +173,40 @@ export default function Home() {
               </ul>
             </div>
           </section>
+
+          <div className="flex justify-center mt-4 p-8">
+            <CustomButton
+              Icon={<Send />}
+              text="Enviar Solicitud PQR/S"
+              size="3"
+            />
+          </div>
         </PqrForm>
       ) : (
-        <TrackerForm>dfsdfgs</TrackerForm>
+        <TrackerForm>
+          <div className="flex flex-row justify-between items-end gap-4">
+            <InputField
+              containerClassName="w-full"
+              label="Codigo Único de Notificación (CUN)"
+              required={true}
+              placeholder="Ej: 2025-01-15-143022-001"
+            />
+
+            <CustomButton Icon={<Search />} text="Consultar" size="3" />
+          </div>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-lg  p-6 mt-7 mb-1">
+            <h4 className="font-semibold text-blue-900 mb-3">
+              ¿Cómo consultar mi solicitud?
+            </h4>
+            <ul className="text-sm text-blue-800 space-y-2">
+              <li>• Ingrese el CUN que recibio al enviar su solicitud</li>
+              <li>• El CUN tiene el formato: YYYY-MM-DD-HHMMSS-XXX</li>
+              <li>• Si no encuentra su CUN, revise su email de confirmación</li>
+              <li>• Para ayuda adicional, contacte al 01 8000 123 456</li>
+            </ul>
+          </div>
+        </TrackerForm>
       )}
     </section>
   );

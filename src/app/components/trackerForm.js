@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@radix-ui/themes';
 import { usePqrForm } from '../core/hooks/usePqrForm';
 
 export function TrackerForm({ children }) {
@@ -11,12 +12,19 @@ export function TrackerForm({ children }) {
           <h2 className="font-bold text-2xl mb-2">
             Consultar Estado de Solicitud
           </h2>
-          <p className="">
-            Ingrese su CUN para consultar el estado de su solicitud PQR/S{' '}
-          </p>
+          <p>Ingrese su CUN para consultar el estado de su solicitud PQR/S </p>
         </div>
+        <div className="bg-white p-7 rounded-b-lg shadow-xl">{children} </div>
       </div>
-      {children}
     </section>
+  );
+}
+
+export function CustomButton({ Icon, text, ...props }) {
+  return (
+    <Button {...props}>
+      {Icon}
+      {text}
+    </Button>
   );
 }
