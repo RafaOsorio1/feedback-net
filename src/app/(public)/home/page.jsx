@@ -178,7 +178,7 @@ export default function Home() {
             <CustomButton
               Icon={<Send />}
               text="Enviar Solicitud PQR/S"
-              size="3"
+              size="4"
             />
           </div>
         </PqrForm>
