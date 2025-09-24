@@ -1,5 +1,6 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import {
   FileText,
   MailIcon,
@@ -18,11 +19,18 @@ import { PqrForm } from '../../components/pqrForm';
 import { CustomButton, TrackerForm } from '../../components/trackerForm';
 import { ViewToggle } from '../../components/viewToggle';
 import { usePqrForm } from '../../core/hooks/usePqrForm';
+import AuthService from '../../core/services/auth/services';
 import { useStore } from '../../core/store';
 
 export default function Home() {
   const { form } = usePqrForm();
   const { initialView } = useStore();
+  const query = useQuery({
+    queryKey: ['auth'],
+    queryFn: () => AuthService.test(),
+  });
+
+  console.log('query.data', query.data);
 
   return (
     <section className="w-full">
