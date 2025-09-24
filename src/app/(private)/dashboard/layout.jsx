@@ -32,7 +32,7 @@ export default function DashboardLayout() {
         <p>Salir</p>
       </header>
 
-      <aside className="bg-blue-950 fixed inset-y-0 left-0 w-64 top-12">
+      <aside className="bg-blue-950 fixed inset-y-0 left-0 w-64 top-20">
         <AsideButton Icon={<House />} Text={'Dashboard'} notificaciones={0} />
 
         <AsideButton
