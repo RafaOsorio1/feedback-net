@@ -13,8 +13,11 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/themes": "^3.2.1",
+    "@tanstack/react-query": "^5.89.0",
     "clsx": "^2.1.1",
+    "ky": "^1.10.0",
     "lucide-react": "^0.542.0",
+    "luxon": "^3.7.2",
     "next": "15.4.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",

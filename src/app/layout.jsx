@@ -1,6 +1,7 @@
 import { Theme } from '@radix-ui/themes';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import ReactQueryProviders from './providers/reactQueryProviders';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -23,7 +24,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Theme accentColor="blue">{children}</Theme>
+        <ReactQueryProviders>
+          <Theme accentColor="blue">{children}</Theme>
+        </ReactQueryProviders>
       </body>
     </html>
   );
