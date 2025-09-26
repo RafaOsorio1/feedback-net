@@ -31,9 +31,9 @@ export function StatsSection() {
           />
           <StatCard
             name="Completadas"
-            value="2"
+            value="1"
             icon={<CheckCircle />}
-            iconColor="bg-green-400"
+            iconColor="bg-green-500"
             lastValue="2"
             newValue="2"
           />
@@ -41,7 +41,7 @@ export function StatsSection() {
         <div className="flex flex-row flex-1 gap-4">
           <StatCard
             name="Vencidas"
-            value="2"
+            value="0"
             icon={<TriangleAlert />}
             iconColor="bg-red-500"
             lastValue="2"
@@ -49,7 +49,7 @@ export function StatsSection() {
           />
           <StatCard
             name="Tiempo Promedio"
-            value="2"
+            value="1.0 dias"
             icon={<TrendingUp />}
             iconColor="bg-purple-600"
             lastValue="2"
@@ -57,7 +57,7 @@ export function StatsSection() {
           />
           <StatCard
             name="Usuarios activos"
-            value="2"
+            value="3"
             icon={<Users />}
             iconColor="bg-pink-500"
             lastValue="2"

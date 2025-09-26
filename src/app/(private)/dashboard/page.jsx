@@ -1,6 +1,7 @@
 import { ChartColumnIncreasing, Clock, Plus, TrendingUp } from 'lucide-react';
 import { Fragment } from 'react';
 import { CustomButton } from '../../components/trackerForm';
+import { Modal } from './components/modal';
 import { Pqrs } from './components/RecentActivity';
 import { StatsSection } from './components/statsSection';
 
@@ -9,11 +10,15 @@ export default function DashboardPage() {
     <Fragment>
       <header className="flex flex-row justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Dashboard - ISP Colombia SA</h1>
-        <CustomButton
-          size="3"
-          radius="large"
-          Icon={<Plus />}
-          text="Nueva Solicitud"
+        <Modal
+          button={
+            <CustomButton
+              size="3"
+              radius="large"
+              Icon={<Plus />}
+              text="Nueva Solicitud"
+            />
+          }
         />
       </header>
       <StatsSection />
@@ -58,18 +63,22 @@ export default function DashboardPage() {
         </section>
         <section className="col-span-4 mt-4 flex flex-col gap-4 border border-gray-200 rounded-2xl shadow-sm p-4">
           <h3 className="text-lg font-semibold">Acciones Rápidas</h3>
-          <CustomButton
-            size="3"
-            radius="large"
-            variant="soft"
-            Icon={<Plus />}
-            text="Nueva Solicitud PQR/S"
-            style={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'start',
-              alignItems: 'center',
-            }}
+          <Modal
+            button={
+              <CustomButton
+                size="3"
+                radius="large"
+                variant="soft"
+                Icon={<Plus />}
+                text="Nueva Solicitud PQR/S"
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'start',
+                  alignItems: 'center',
+                }}
+              />
+            }
           />
           <CustomButton
             size="3"

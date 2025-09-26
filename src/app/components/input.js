@@ -2,10 +2,10 @@ import { TextField } from '@radix-ui/themes';
 
 export function InputField({
   label,
-
   required = false,
   className = '',
   containerClassName = '',
+  classLabel = '',
   ...props
 }) {
   const { icon } = props;
@@ -13,7 +13,7 @@ export function InputField({
     <div className={`space-y-2 ${containerClassName}`}>
       {label && (
         <label
-          className={`block text-base font-semibold ${required ? 'after:content-["*"] after:ml-1 after:text-red-500' : ''} mb-2`}
+          className={`block mb-2  text-base font-semibold ${required ? 'after:content-["*"] after:ml-1 after:text-red-500' : ''} ${classLabel || 'font-medium text-base'}`}
           htmlFor={props.id || props.name}
         >
           {label}
