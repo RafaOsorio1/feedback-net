@@ -1,4 +1,7 @@
+'use client';
+
 import {
+  Building,
   Clock8,
   Mail,
   MailIcon,
@@ -6,10 +9,14 @@ import {
   Phone,
   Wifi,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Fragment } from 'react';
+import { CustomButton } from '../../components/trackerForm';
 
 export default function PublicLayout({ children }) {
+  const router = useRouter();
   return (
-    <>
+    <Fragment>
       <header className="flex flex-row w-full justify-between px-16 py-4 items-center border-b-1 border-solid border-gray-200">
         <div className="flex flex-row gap-4 items-center">
           <div className="bg-blue-600 text-white w-10 h-10 flex justify-center items-center rounded-lg">
@@ -108,7 +115,18 @@ export default function PublicLayout({ children }) {
           </p>
         </section>
       </footer>
-    </>
+      <div className="fixed bottom-6 right-6">
+        <CustomButton
+          Icon={<Building />}
+          text="Portal ISP"
+          size="3"
+          radius="large"
+          onClick={() => {
+            router.push('/login');
+          }}
+        />
+      </div>
+    </Fragment>
   );
 }
 
