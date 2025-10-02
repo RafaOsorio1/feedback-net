@@ -3,81 +3,142 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { Eye, SquarePen } from 'lucide-react';
 
 // Mocap de datos para mostrar en la tabla
 const mockData = [
   {
     id: '1',
-    cun: 'CUN12345',
-    subject: 'Problema con el servicio',
-    userName: 'Juan Pérez',
-    userEmail: 'juan@example.com',
-    type: 'Peticion',
-    status: 'Recibido',
-    priority: 'Media',
-    daysUntilDeadline: 5,
-    createdAt: '2025-09-20',
+    cun: '2024-01-15-143022-001',
+    solicitud: 'Internet muy lento',
+    usuario: 'Juan Perez',
+    usuarioEmail: 'juan.perez@email.com',
+    tipo: 'Queja',
+    Estado: 'En Proceso',
+    prioridad: 'Alta',
+    vencimiento: '8 dias restantes',
+    tiempo: 'hace mas de 1 año',
+    acciones: <Eye />,
+    accion: <SquarePen />,
   },
   {
     id: '2',
-    cun: 'CUN54321',
-    subject: 'Queja por retraso',
-    userName: 'Ana Gómez',
-    userEmail: 'ana@example.com',
-    type: 'Queja',
-    status: 'En Proceso',
-    priority: 'Alta',
-    daysUntilDeadline: -2,
-    createdAt: '2025-09-18',
+    cun: '2024-01-14-091547-002',
+    solicitud: 'Solicitud de informacion sobre planes',
+    usuario: 'Maria Garcia',
+    usuarioEmail: 'maria.garcia@email.com',
+    tipo: 'Petición',
+    Estado: 'Respondido',
+    prioridad: 'Media',
+    vencimiento: '9 dias restantes',
+    tiempo: 'hace mas de 1 año',
+    acciones: <Eye />,
+    accion: <SquarePen />,
+  },
+  {
+    id: '3',
+    cun: '2024-01-13-162033-003',
+    solicitud: 'Facturación incorrecta',
+    usuario: 'Carlos López',
+    usuarioEmail: 'carlos.lopez@email.com',
+    tipo: 'Reclamo',
+    Estado: 'Recibido',
+    prioridad: 'Critica',
+    vencimiento: '10 dias restantes',
+    tiempo: 'hace mas de 1 año',
+    acciones: <Eye />,
+    accion: <SquarePen />,
   },
 ];
 
 // Columnas simples para mostrar la data
 const columns = [
   {
-    header: 'CUN',
-    accessorKey: 'cun',
-    cell: (info) => info.getValue(),
+    header: 'CUN / SOLICITUD',
+    cell: ({ row }) => {
+      const cun = row.original.cun;
+      const solicitud = row.original.solicitud;
+
+      return (
+        <div>
+          <p className="font-medium">{cun}</p>
+          <p>{solicitud}</p>
+        </div>
+      );
+    },
   },
   {
-    header: 'Asunto',
-    accessorKey: 'subject',
-    cell: (info) => info.getValue(),
+    header: 'USUARIO',
+    cell: ({ row }) => {
+      const usuario = row.original.usuario;
+      const usuarioEmail = row.original.usuarioEmail;
+      return (
+        <div>
+          <p className="font-medium">{usuario}</p>
+          <p>{usuarioEmail}</p>
+        </div>
+      );
+    },
   },
   {
-    header: 'Usuario',
-    accessorKey: 'userName',
-    cell: (info) => info.getValue(),
+    header: 'TIPO',
+    cell: ({ row }) => {
+      const tipo = row.original.tipo;
+
+      return (
+        <div>
+          <p className="font-medium">{tipo}</p>
+        </div>
+      );
+    },
   },
   {
-    header: 'Email',
-    accessorKey: 'userEmail',
-    cell: (info) => info.getValue(),
+    header: 'ESTADO',
+    cell: ({ row }) => {
+      const Estado = row.original.Estado;
+      return (
+        <div>
+          <p>{Estado}</p>
+        </div>
+      );
+    },
   },
   {
-    header: 'Tipo',
-    accessorKey: 'type',
-    cell: (info) => info.getValue(),
+    header: 'PRIORIDAD',
+    cell: ({ row }) => {
+      const prioridad = row.original.prioridad;
+      return (
+        <div>
+          <p className="text-orange-500 font-medium">{prioridad}</p>
+        </div>
+      );
+    },
   },
   {
-    header: 'Estado',
-    accessorKey: 'status',
-    cell: (info) => info.getValue(),
+    header: 'VENCIMIENTO',
+    cell: ({ row }) => {
+      const vencimiento = row.original.vencimiento;
+      const tiempo = row.original.tiempo;
+      return (
+        <div>
+          <p className="font-medium">{vencimiento}</p>
+          <p>{tiempo}</p>
+        </div>
+      );
+    },
   },
   {
-    header: 'Prioridad',
-    accessorKey: 'priority',
-    cell: (info) => info.getValue(),
-  },
-  {
-    header: 'Vencimiento (días)',
-    accessorKey: 'daysUntilDeadline',
-    cell: (info) => info.getValue(),
-  },
-  {
-    header: 'Creado',
-    accessorKey: 'createdAt',
-    cell: (info) => info.getValue(),
+    header: 'ACCIONES',
+    cell: ({ row }) => {
+      const acciones = row.original.acciones;
+      const accion = row.original.accion;
+      return (
+        <div className="flex flex-row gap-3">
+          <p className="text-blue-500">{acciones}</p>
+          <p className="text-gray-500">{accion}</p>
+        </div>
+      );
+    },
   },
 ];
 
