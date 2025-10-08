@@ -1,9 +1,11 @@
+import { Badge } from '@radix-ui/themes';
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import { Eye, SquarePen } from 'lucide-react';
+import { PriorityBadge, StatusBadge } from '../../components/RecentActivity';
 
 // Mocap de datos para mostrar en la tabla
 const mockData = [
@@ -14,7 +16,7 @@ const mockData = [
     usuario: 'Juan Perez',
     usuarioEmail: 'juan.perez@email.com',
     tipo: 'Queja',
-    Estado: 'En Proceso',
+    estado: 'En Proceso',
     prioridad: 'Alta',
     vencimiento: '8 dias restantes',
     tiempo: 'hace mas de 1 año',
@@ -28,7 +30,7 @@ const mockData = [
     usuario: 'Maria Garcia',
     usuarioEmail: 'maria.garcia@email.com',
     tipo: 'Petición',
-    Estado: 'Respondido',
+    estado: 'Respondido',
     prioridad: 'Media',
     vencimiento: '9 dias restantes',
     tiempo: 'hace mas de 1 año',
@@ -42,7 +44,7 @@ const mockData = [
     usuario: 'Carlos López',
     usuarioEmail: 'carlos.lopez@email.com',
     tipo: 'Reclamo',
-    Estado: 'Recibido',
+    estado: 'Recibido',
     prioridad: 'Critica',
     vencimiento: '10 dias restantes',
     tiempo: 'hace mas de 1 año',
@@ -85,33 +87,21 @@ const columns = [
     cell: ({ row }) => {
       const tipo = row.original.tipo;
 
-      return (
-        <div>
-          <p className="font-medium">{tipo}</p>
-        </div>
-      );
+      return <TypeBadge type={tipo} />;
     },
   },
   {
     header: 'ESTADO',
     cell: ({ row }) => {
-      const Estado = row.original.Estado;
-      return (
-        <div>
-          <p>{Estado}</p>
-        </div>
-      );
+      const estado = row.original.estado;
+      return <StatusBadge state={estado} />;
     },
   },
   {
     header: 'PRIORIDAD',
     cell: ({ row }) => {
       const prioridad = row.original.prioridad;
-      return (
-        <div>
-          <p className="text-orange-500 font-medium">{prioridad}</p>
-        </div>
-      );
+      return <PriorityBadge priority={prioridad} />;
     },
   },
   {
@@ -142,6 +132,33 @@ const columns = [
   },
 ];
 
+export function TypeBadge({ type }) {
+  let color = 'blue';
+
+  switch (type) {
+    case 'Queja':
+      color = 'red';
+      break;
+
+    case 'Petición':
+      color = 'blue';
+      break;
+
+    case 'Reclamo':
+      color = 'orange';
+      break;
+    default:
+      color = 'blue';
+  }
+
+  return (
+    // @ts-ignore
+    <Badge color={color} size="2" radius="large">
+      {type}
+    </Badge>
+  );
+}
+
 export default function SimpleTanStackTable() {
   const table = useReactTable({
     data: mockData,
@@ -152,8 +169,9 @@ export default function SimpleTanStackTable() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
       <h2 className="text-xl font-semibold text-gray-900 mb-4">
-        Tabla de Solicitudes (Demo)
+        Gestión de Solicitudes PQR/S
       </h2>
+
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50">

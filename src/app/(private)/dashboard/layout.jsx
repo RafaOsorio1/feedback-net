@@ -13,11 +13,13 @@ import {
   Users,
 } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Fragment } from 'react';
+import { CustomButton } from '../../components/trackerForm';
 
 export default function DashboardLayout({ children }) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const navItem = [
     {
@@ -34,7 +36,7 @@ export default function DashboardLayout({ children }) {
     },
     {
       icon: <ChartColumn />,
-      label: 'Analitica',
+      label: 'Analítica',
       notificaciones: 0,
       href: '/dashboard/analitica',
     },
@@ -72,23 +74,28 @@ export default function DashboardLayout({ children }) {
 
   return (
     <Fragment>
-      <header className="fixed top-0 justify-between flex flex-row left-0 right-0 p-4 px-8 h-20 border-b border-gray-200 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 flex flex-row justify-between p-4 px-8 h-20 border-b border-gray-200 shadow-sm bg-white z-10">
         <div className="flex flex-col">
-          <h1 className="text-blue-600 font-bold  text-3xl">FeedbackNet</h1>
-          <p className="text-gray-500 ">Sistema de Gestion PQR/S</p>
+          <h1 className="text-blue-600 font-bold text-3xl">FeedbackNet</h1>
+          <p className="text-gray-500">Sistema de Gestión PQR/S</p>
         </div>
+
         <div className="flex flex-row gap-9 justify-center items-center">
-          {/**todo: notificaciones */}
           <Bell className="text-gray-500" />
-          <div className="flex flex-col items-center-last">
-            <h3 className=" font-medium text-base">Administrador ISP</h3>
-            <p className="text-gray-500">ISP Colombia SA</p>
+          <div className="flex flex-col items-end">
+            <h3 className="font-medium text-base">Administrador ISP</h3>
+            <p className="text-gray-500 text-sm">ISP Colombia SA</p>
           </div>
           <Settings className="text-gray-500" />
-          <div className="flex flex-row items-center gap-2">
-            <LogOut />
-            <p>Salir</p>
-          </div>
+
+          <CustomButton
+            Icon={<LogOut />}
+            text="Salir"
+            size="2"
+            onClick={() => {
+              router.push('/login');
+            }}
+          />
         </div>
       </header>
 
@@ -107,6 +114,7 @@ export default function DashboardLayout({ children }) {
           );
         })}
       </aside>
+
       <main className="fixed top-20 inset-y-0 left-72 right-0 p-8 overflow-y-auto">
         {children}
       </main>
@@ -120,8 +128,7 @@ function AsideButton({ Icon, Text, notificaciones, href, isActive }) {
       <div
         className={`
           flex flex-row justify-between my-1.5 rounded-lg text-white items-center
-          w-full p-4 px-5
-          transition-all duration-300 ease-out
+          w-full p-4 px-5 transition-all duration-300 ease-out
           ${
             isActive
               ? 'bg-blue-700 shadow-md'

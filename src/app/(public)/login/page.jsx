@@ -1,8 +1,10 @@
 import { KeyRound, LogOut, MailIcon, Wifi } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { InputField } from '../../components/input';
 import { CustomButton } from '../../components/trackerForm';
 
 export default function LoginPage() {
+  const router = useRouter();
   return (
     <section className="w-lg">
       <div className="text-white flex flex-col justify-center items-center gap-3 ">
@@ -41,10 +43,13 @@ export default function LoginPage() {
           size="3"
           radius="large"
           Icon={<LogOut />}
-          text="Iniciar sesion"
+          text="Iniciar sesión"
           style={{
             margin: '20px 0px',
             width: '100%',
+          }}
+          onClick={() => {
+            router.push('/login');
           }}
         />
 
