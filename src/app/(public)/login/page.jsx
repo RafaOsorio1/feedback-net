@@ -1,10 +1,19 @@
-import { KeyRound, LogOut, MailIcon, Wifi } from 'lucide-react';
+'use client';
+
+import { KeyRound, MailIcon, Wifi } from 'lucide-react';
+import { Controller } from 'react-hook-form';
 import { InputField } from '../../components/input';
-import { CustomButton } from '../../components/trackerForm';
+import { useLoginForm } from './core/hooks/loginForm';
 
 export default function LoginPage() {
+  const { form, onSubmit, isLoading } = useLoginForm();
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = form;
+
   return (
-    <section className="w-lg">
+    <section className="w-lg max-w-md mx-auto px-4">
       <div className="text-white flex flex-col justify-center items-center gap-3 ">
         <div className="bg-white flex justify-center items-center w-24 h-24 p-4 rounded-full shadow-xl mb-2">
           <Wifi className="text-blue-500 w-full h-full" />
@@ -15,61 +24,99 @@ export default function LoginPage() {
         </p>
       </div>
 
-      <div className="bg-white rounded-lg px-9 py-5 shadow-xl mt-9">
-        <div>
+      <div className="bg-white rounded-lg px-6 py-5 shadow-xl mt-9">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h2 className="font-semibold text-2xl flex justify-center mb-6 mt-4">
             Iniciar Sesión
           </h2>
 
-          <InputField
-            type="email"
-            icon={<MailIcon />}
-            label="Correo Electrónico"
-            placeholder="admin@isp.com"
-            containerClassName="mb-4"
-          />
+          <div className="space-y-4">
+            {/* Email */}
+            <Controller
+              name="email"
+              control={form.control}
+              render={({ field }) => (
+                <div>
+                  <InputField
+                    type="email"
+                    required
+                    onBlur={field.onBlur}
+                    onChange={field.onChange}
+                    value={field.value}
+                    icon={<MailIcon />}
+                    label="Correo Electrónico"
+                    placeholder="admin@isp.com"
+                    disabled={isLoading}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+              )}
+            />
 
-          <InputField
-            type="password"
-            icon={<KeyRound />}
-            label="Contraseña"
-            placeholder="........."
-          />
-        </div>
+            {/* Password */}
+            <Controller
+              name="password"
+              control={form.control}
+              render={({ field }) => (
+                <div>
+                  <InputField
+                    type="password"
+                    required
+                    onBlur={field.onBlur}
+                    onChange={field.onChange}
+                    value={field.value}
+                    icon={<KeyRound />}
+                    label="Contraseña"
+                    placeholder="••••••"
+                    disabled={isLoading}
+                  />
+                  {errors.password && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+              )}
+            />
+          </div>
 
-        <CustomButton
-          size="3"
-          radius="large"
-          Icon={<LogOut />}
-          text="Iniciar sesion"
-          style={{
-            margin: '20px 0px',
-            width: '100%',
-          }}
-        />
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-blue-600 text-white py-2 rounded-lg mt-6 font-medium hover:bg-blue-700 disabled:opacity-50"
+          >
+            {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+          </button>
+        </form>
 
-        {/* <button
-          radius="large"
-          className="border-solid border-1 flex flex-row justify-center gap-3 p-3 bg-blue-600 border-blue-600 mb-9 text-white font-semibold mt-6 w-full"
-        >
-          <LogOut />
-          Iniciar Sesión
-        </button> */}
-        <div className="bg-gray-100 rounded-lg py-4 p-5 gap-5 mb-7 font-medium text-sm">
+        <div className="bg-gray-100 rounded-lg p-4 mt-6 mb-7">
           <p className="font-semibold text-base mb-2">
             Credenciales de demostración:
           </p>
-          <p>Email: admin@isp.com</p>
-          <p>Contraseña: password</p>
+          <p className="text-sm">Email: admin@isp.com</p>
+          <p className="text-sm">Contraseña: password</p>
         </div>
+
         <div className="flex flex-row gap-2 font-medium mb-4 justify-center">
-          <p>¿No tienes cuenta? </p>
-          <p className="text-blue-600 font-medium">Registrar mi ISP</p>
+          <p className="text-gray-600">¿No tienes cuenta?</p>
+          <button
+            type="submit"
+            onClick={() => alert('TODO: navegar a registro')}
+            className="text-blue-600 font-medium hover:underline"
+            disabled={isLoading}
+          >
+            Registrar mi ISP
+          </button>
         </div>
       </div>
-      <div className="flex justify-center">
-        <p className="text-white mt-10">
-          Cumplimiento Resolución CRC 6242 de 2021{' '}
+
+      <div className="text-center mt-10">
+        <p className="text-white text-sm">
+          Cumplimiento Resolución CRC 6242 de 2021
         </p>
       </div>
     </section>

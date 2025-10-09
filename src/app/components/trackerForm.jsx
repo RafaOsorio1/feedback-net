@@ -20,9 +20,9 @@ export function TrackerForm({ children }) {
   );
 }
 
-export function CustomButton({ Icon, text, ...props }) {
+export function CustomButton({ Icon, text, type = 'submit', ...props }) {
   return (
-    <Button {...props}>
+    <Button type={type} {...props}>
       {Icon}
       {text}
     </Button>

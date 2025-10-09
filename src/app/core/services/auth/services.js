@@ -2,14 +2,16 @@ import { WebHttpClient } from '../../../lib/ky.client';
 
 export default class AuthService extends WebHttpClient {
   static async login(email, password) {
-    const response = await WebHttpClient.client.post('/auth/login', {
-      json: { email, password },
-    });
-    return response.json();
-  }
+    console.log('email, password', email, password);
 
-  static async test() {
-    const response = await WebHttpClient.client.get('api/auth/test');
-    return response.json();
+    try {
+      const response = await WebHttpClient.client.post('api/auth/login', {
+        json: { email, password },
+      });
+      return response.json();
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      return { error: 'Error al iniciar sesión' };
+    }
   }
 }
