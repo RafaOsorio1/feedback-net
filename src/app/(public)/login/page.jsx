@@ -1,8 +1,8 @@
-'use client';
-
-import { KeyRound, MailIcon, Wifi } from 'lucide-react';
+import { KeyRound, LogOut, MailIcon, Wifi } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { Controller } from 'react-hook-form';
 import { InputField } from '../../components/input';
+import { CustomButton } from '../../components/trackerForm';
 import { useLoginForm } from './core/hooks/loginForm';
 
 export default function LoginPage() {
@@ -12,6 +12,7 @@ export default function LoginPage() {
     formState: { errors },
   } = form;
 
+  const router = useRouter();
   return (
     <section className="w-lg max-w-md mx-auto px-4">
       <div className="text-white flex flex-col justify-center items-center gap-3 ">
@@ -84,14 +85,19 @@ export default function LoginPage() {
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg mt-6 font-medium hover:bg-blue-700 disabled:opacity-50"
-          >
-            {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
-          </button>
-        </form>
+        <CustomButton
+          size="3"
+          radius="large"
+          Icon={<LogOut />}
+          text="Iniciar sesión"
+          style={{
+            margin: '20px 0px',
+            width: '100%',
+          }}
+          onClick={() => {
+            router.push('/login');
+          }}
+        />
 
         <div className="bg-gray-100 rounded-lg p-4 mt-6 mb-7">
           <p className="font-semibold text-base mb-2">
