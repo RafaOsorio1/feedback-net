@@ -11,7 +11,19 @@ export default class AuthService extends WebHttpClient {
       return response.json();
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
-      return { error: 'Error al iniciar sesión' };
+      throw new Error(error.message || 'Error al iniciar sesión');
+    }
+  }
+
+  static async register(userData) {
+    try {
+      const response = await WebHttpClient.client.post('api/auth/signup', {
+        json: userData,
+      });
+      return response.json();
+    } catch (error) {
+      console.error('Error al registrar usuario:', error);
+      throw new Error(error.message || 'Error al registrar el usuario');
     }
   }
 }

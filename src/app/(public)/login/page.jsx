@@ -1,3 +1,5 @@
+'use client';
+
 import { KeyRound, LogOut, MailIcon, Wifi } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Controller } from 'react-hook-form';
@@ -13,6 +15,7 @@ export default function LoginPage() {
   } = form;
 
   const router = useRouter();
+
   return (
     <section className="w-lg max-w-md mx-auto px-4">
       <div className="text-white flex flex-col justify-center items-center gap-3 ">
@@ -85,19 +88,19 @@ export default function LoginPage() {
             />
           </div>
 
-        <CustomButton
-          size="3"
-          radius="large"
-          Icon={<LogOut />}
-          text="Iniciar sesión"
-          style={{
-            margin: '20px 0px',
-            width: '100%',
-          }}
-          onClick={() => {
-            router.push('/login');
-          }}
-        />
+          <CustomButton
+            type="submit"
+            size="3"
+            radius="large"
+            Icon={<LogOut />}
+            text={isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+            style={{
+              margin: '20px 0px',
+              width: '100%',
+            }}
+            disabled={isLoading}
+          />
+        </form>
 
         <div className="bg-gray-100 rounded-lg p-4 mt-6 mb-7">
           <p className="font-semibold text-base mb-2">
@@ -111,7 +114,7 @@ export default function LoginPage() {
           <p className="text-gray-600">¿No tienes cuenta?</p>
           <button
             type="submit"
-            onClick={() => alert('TODO: navegar a registro')}
+            onClick={() => router.push('/register')}
             className="text-blue-600 font-medium hover:underline"
             disabled={isLoading}
           >

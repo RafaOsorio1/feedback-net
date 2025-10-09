@@ -1,10 +1,8 @@
 'use client';
 
 import { Button } from '@radix-ui/themes';
-import { usePqrForm } from '../core/hooks/usePqrForm';
 
 export function TrackerForm({ children }) {
-  const { form } = usePqrForm();
   return (
     <section className="bg-gray-200">
       <div className="max-w-4xl p-4 mx-auto">
@@ -22,7 +20,11 @@ export function TrackerForm({ children }) {
 
 export function CustomButton({ Icon, text, type = 'submit', ...props }) {
   return (
-    <Button type={type} {...props}>
+    <Button
+      // @ts-ignore
+      type={type}
+      {...props}
+    >
       {Icon}
       {text}
     </Button>
