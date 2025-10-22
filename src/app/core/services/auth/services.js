@@ -11,7 +11,6 @@ export default class AuthService extends WebHttpClient {
       return response.json();
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
-      throw new Error(error.message || 'Error al iniciar sesión');
     }
   }
 
@@ -23,7 +22,6 @@ export default class AuthService extends WebHttpClient {
       return response.json();
     } catch (error) {
       console.error('Error al registrar usuario:', error);
-      throw new Error(error.message || 'Error al registrar el usuario');
     }
   }
 }

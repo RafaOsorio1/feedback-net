@@ -39,29 +39,18 @@ export default function RegisterPage() {
   });
 
   const onSubmit = async (data) => {
-    try {
-      toast.loading('Creando cuenta...', { id: toastId });
-      await AuthService.register(data);
+    toast.loading('Creando cuenta...', { id: toastId });
+    await AuthService.register(data);
 
-      toast.success('¡Cuenta creada exitosamente!', {
-        id: toastId,
-        duration: 2000,
-      });
+    toast.success('¡Cuenta creada exitosamente!', {
+      id: toastId,
+      duration: 2000,
+    });
 
-      // Redirect to login after successful registration
-      setTimeout(() => {
-        router.push('/login');
-      }, 2000);
-    } catch (error) {
-      console.error('Registration error:', error);
-      toast.error(
-        error.message || 'Error al crear la cuenta. Intenta nuevamente.',
-        {
-          id: toastId,
-          duration: 4000,
-        },
-      );
-    }
+    // Redirect to login after successful registration
+    setTimeout(() => {
+      router.push('/login');
+    }, 2000);
   };
 
   return (

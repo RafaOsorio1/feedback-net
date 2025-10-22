@@ -1,0 +1,34 @@
+'use client';
+
+import { useFormContext } from 'react-hook-form';
+
+import {
+  RequestType,
+  RequestTypeDescriptions,
+  RequestTypeLabels,
+} from '../../../core/constants/requestTypes';
+import { Card } from './card';
+
+export function RequestTypeStep() {
+  const { setValue, watch } = useFormContext();
+  const requestType = watch('requestType');
+
+  return (
+    <section>
+      <h4 className="font-semibold text-2xl mb-4">Tipo de Solicitud *</h4>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {Object.values(RequestType).map((type) => (
+          <Card
+            key={type}
+            isSelected={requestType === type}
+            onClick={() =>
+              setValue('requestType', type, { shouldValidate: true })
+            }
+            title={RequestTypeLabels[type]}
+            description={RequestTypeDescriptions[type]}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}

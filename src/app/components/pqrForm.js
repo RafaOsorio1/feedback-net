@@ -4,7 +4,7 @@ import { FormProvider } from 'react-hook-form';
 import { usePqrForm } from '../core/hooks/usePqrForm';
 
 export function PqrForm({ children }) {
-  const { form } = usePqrForm();
+  const { form, onSubmit } = usePqrForm();
   return (
     <section className="bg-gray-200">
       <div className="max-w-4xl p-4 mx-auto">
@@ -16,7 +16,11 @@ export function PqrForm({ children }) {
           </p>
         </div>
         <FormProvider {...form}>
-          <div className="bg-white rounded-b-lg shadow-xl p-3">{children} </div>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="bg-white rounded-b-lg shadow-xl p-3">
+              {children}
+            </div>
+          </form>
         </FormProvider>
       </div>
     </section>

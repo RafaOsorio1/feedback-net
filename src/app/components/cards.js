@@ -1,50 +1,73 @@
 import clsx from 'clsx';
+import { useController } from 'react-hook-form';
+import {
+  RequestType,
+  RequestTypeDescriptions,
+  RequestTypeLabels,
+} from '../constants/requestTypes';
 
-export function Card({ checkboxName, title, description, className }) {
+export function Card({ name, value, control }) {
+  const { field } = useController({
+    name,
+    control,
+    defaultValue: '',
+  });
+
   return (
-    <div
+    <label
       className={clsx(
-        'p-4 flex flex-row items-center gap-2 border-2 border-solid border-gray-300 rounded-md',
-        className,
+        'p-4 flex flex-row items-center gap-2 border-2 border-solid border-gray-300 rounded-md cursor-pointer',
+        'hover:border-blue-500 transition-colors',
+        field.value === value && 'border-blue-500 bg-blue-50',
       )}
     >
-      <input type="checkbox" name={checkboxName} className="rounded-full" />
-      <div>
-        <h2 className="font-bold text-2xl">{title}</h2>
-        <p className="text-gray-600 font-semibold">{description}</p>
+      <input
+        type="radio"
+        {...field}
+        value={value}
+        checked={field.value === value}
+        onChange={(e) => field.onChange(e.target.value)}
+        className="sr-only"
+      />
+      <div
+        className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+          field.value === value ? 'border-blue-500' : 'border-gray-400'
+        }`}
+      >
+        {field.value === value && (
+          <div className="w-3 h-3 rounded-full bg-blue-500" />
+        )}
       </div>
-    </div>
+      <div>
+        <h2 className="font-bold text-2xl">{RequestTypeLabels[value]}</h2>
+        <p className="text-gray-600 font-semibold">
+          {RequestTypeDescriptions[value]}
+        </p>
+      </div>
+    </label>
   );
 }
 
-export function CardContainer() {
+export function CardContainer({ control }) {
   return (
     <section className="p-5">
       <h4 className="font-semibold mb-4 text-2xl">Tipo de Solicitud *</h4>
-      <div className="grid grid-cols-2 grid-rows-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card
-          title="Petición"
-          description="Solicitud de informacíon, servicios o tramites"
-          checkboxName="Petición"
-          className="col-span-1"
+          name="requestType"
+          value={RequestType.PETITION}
+          control={control}
         />
         <Card
-          title="Quejas"
-          description="Manifestación de insatisfacción por un servicio"
-          checkboxName="Quejas"
-          className="col-span-1"
+          name="requestType"
+          value={RequestType.COMPLAINT}
+          control={control}
         />
+        <Card name="requestType" value={RequestType.CLAIM} control={control} />
         <Card
-          title="Reclamo"
-          description="Solicitud de correción o compensación"
-          checkboxName="Reclamo"
-          className="col-span-1 row-span-1"
-        />
-        <Card
-          title="Sugerencia"
-          description="Propuesta de mejora o recomendación"
-          checkboxName="Sugerencia"
-          className="col-span-1 row-span-1"
+          name="requestType"
+          value={RequestType.SUGGESTION}
+          control={control}
         />
       </div>
     </section>
