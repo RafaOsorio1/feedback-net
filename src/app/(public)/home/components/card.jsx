@@ -28,8 +28,3 @@ export function Card({ title, description, isSelected, onClick }) {
     </button>
   );
 }
-function suma({ a, b }) {
-  return a + b;
-}
-
-suma();

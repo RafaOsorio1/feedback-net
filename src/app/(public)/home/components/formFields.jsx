@@ -6,7 +6,7 @@ import { RequestTypeStep } from './RequestTypeStep.jsx';
 
 export function FormFields() {
   return (
-    <div className="bg-white rounded-b-lg shadow-xl p-6 space-y-8">
+    <div className="bg-white rounded-b-lg shadow-xl p-6">
       <RequestTypeStep />
       <PersonalInfoStep />
       <RequestDetailsStep />

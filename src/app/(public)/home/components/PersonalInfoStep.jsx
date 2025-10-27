@@ -10,7 +10,7 @@ export function PersonalInfoStep() {
       <h4 className="font-semibold text-2xl mb-4">Datos Personales</h4>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Controller
-          name="name"
+          name="fullName"
           render={({ field, fieldState }) => (
             <InputField
               {...field}

@@ -11,7 +11,7 @@ import { Card } from './card';
 
 export function RequestTypeStep() {
   const { setValue, watch } = useFormContext();
-  const requestType = watch('requestType');
+  const requestType = watch('type');
 
   return (
     <section>
@@ -21,9 +21,7 @@ export function RequestTypeStep() {
           <Card
             key={type}
             isSelected={requestType === type}
-            onClick={() =>
-              setValue('requestType', type, { shouldValidate: true })
-            }
+            onClick={() => setValue('type', type, { shouldValidate: true })}
             title={RequestTypeLabels[type]}
             description={RequestTypeDescriptions[type]}
           />
