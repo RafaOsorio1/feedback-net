@@ -27,7 +27,7 @@ const pqrSchema = z.object({
 });
 
 export function usePqrForm() {
-  const { setModalOpen } = useStore();
+  const { openNotificationModal } = useStore();
   const form = useForm({
     resolver: zodResolver(pqrSchema),
     defaultValues: {
@@ -44,13 +44,20 @@ export function usePqrForm() {
 
   const mutation = useMutation({
     mutationFn: PqrFormService.createPqr,
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
+      const referenceNumber = data?.referenceNumber || `PQR-${Date.now()}`;
       toast.success('PQR enviada exitosamente');
       form.reset();
-      setModalOpen(true);
+
+      // Abrir el modal de notificación con los detalles
+      openNotificationModal({
+        title: '¡Solicitud enviada!',
+        message: 'Hemos recibido tu solicitud correctamente.',
+        referenceNumber: referenceNumber,
+      });
     },
-    onError: (error) => {
-      toast.error(error.message || 'Error al enviar la PQR');
+    onError: () => {
+      toast.error('Error al enviar la PQR');
     },
   });
 

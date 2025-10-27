@@ -24,8 +24,6 @@ export function RequestDetailsStep() {
     return <div>Error al cargar ISPs</div>;
   }
 
-  console.log(isps);
-
   return (
     <section>
       <h4 className="font-semibold text-2xl mb-4">Detalles de la Solicitud</h4>
