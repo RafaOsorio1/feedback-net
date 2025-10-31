@@ -7,6 +7,7 @@ import { CustomButton } from '../../../components/trackerForm';
 import { useAuth } from '../../../core/AuthContext/context';
 import { Modal } from '../components/modal';
 import RequestServices from '../core/request.services';
+import { RequestDetailsModal } from './components/RequestDetailsModal';
 import { RequestsTable } from './components/table';
 
 export default function SolicitudPage() {
@@ -15,6 +16,9 @@ export default function SolicitudPage() {
     queryKey: ['request', isp?.id || ''],
     queryFn: () => RequestServices.getRequests(isp?.id),
   });
+
+  const tableData = requestQuery.data?.data || [];
+
   return (
     <Fragment>
       <header className="flex flex-row justify-between items-center mb-8">
@@ -34,8 +38,11 @@ export default function SolicitudPage() {
       </header>
 
       <section className="w-full shadow-lg rounded-md min-h-7 border border-gray-100">
-        <RequestsTable data={requestQuery.data?.data || []} />
+        <RequestsTable data={tableData} />
       </section>
+
+      {/* Request Details Modal */}
+      <RequestDetailsModal />
     </Fragment>
   );
 }

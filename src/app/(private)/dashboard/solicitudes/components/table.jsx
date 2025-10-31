@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-table';
 import { CheckCircle, Clock, Eye, MessageSquare, XCircle } from 'lucide-react';
 import { DateTime } from 'luxon';
+import { usePathname, useRouter } from 'next/navigation';
 import { RequestStatus } from '../../../../core/constants/requestTypes';
 
 // Configuración de estados
@@ -173,13 +174,29 @@ const columns = [
   },
   {
     header: 'ACCIONES',
-    cell: () => {
+    cell: ({ row }) => {
+      const router = useRouter();
+      const pathname = usePathname();
+
+      const handleViewDetails = () => {
+        const params = new URLSearchParams();
+        params.set('requestId', row.original.id);
+        router.push(`${pathname}?${params.toString()}`);
+      };
+
       return (
         <div className="flex flex-row gap-3">
-          <button className="text-blue-500 hover:text-blue-700 transition-colors">
+          <button
+            onClick={handleViewDetails}
+            className="text-blue-500 hover:text-blue-700 transition-colors"
+            aria-label="Ver detalles"
+          >
             <Eye className="w-4 h-4" />
           </button>
-          <button className="text-gray-500 hover:text-gray-700 transition-colors">
+          <button
+            className="text-gray-500 hover:text-gray-700 transition-colors"
+            aria-label="Enviar mensaje"
+          >
             <MessageSquare className="w-4 h-4" />
           </button>
         </div>
