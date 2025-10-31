@@ -29,9 +29,7 @@ export function RequestDetailsStep() {
       <h4 className="font-semibold text-2xl mb-4">Detalles de la Solicitud</h4>
 
       <div className="space-y-6 w-full">
-        {/* --- Asunto e ISP --- */}
         <div className="flex flex-col md:flex-row gap-4 w-full">
-          {/* Campo: Asunto */}
           <div className="flex-1">
             <Controller
               name="subject"
@@ -47,8 +45,6 @@ export function RequestDetailsStep() {
               )}
             />
           </div>
-
-          {/* Campo: ISP */}
           <div className="flex-1">
             <Controller
               name="ispId"
@@ -99,8 +95,6 @@ export function RequestDetailsStep() {
             />
           </div>
         </div>
-
-        {/* --- Mensaje --- */}
         <div>
           <div className="flex items-center gap-2 mb-2">
             <MessageCircle className="text-gray-600" size={20} />

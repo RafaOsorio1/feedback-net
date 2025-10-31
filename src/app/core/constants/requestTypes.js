@@ -19,3 +19,9 @@ export const RequestTypeDescriptions = {
   [RequestType.CLAIM]: 'Solicitud de corrección o compensación',
   [RequestType.SUGGESTION]: 'Propuesta de mejora o recomendación',
 };
+export const RequestStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  RESOLVED: 'RESOLVED',
+  CANCELED: 'CANCELED',
+};

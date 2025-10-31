@@ -16,10 +16,12 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Fragment } from 'react';
 import { CustomButton } from '../../components/trackerForm';
+import { useAuth } from '../../core/AuthContext/context';
 
 export default function DashboardLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { isp } = useAuth();
 
   const navItem = [
     {
@@ -83,8 +85,8 @@ export default function DashboardLayout({ children }) {
         <div className="flex flex-row gap-9 justify-center items-center">
           <Bell className="text-gray-500" />
           <div className="flex flex-col items-end">
-            <h3 className="font-medium text-base">Administrador ISP</h3>
-            <p className="text-gray-500 text-sm">ISP Colombia SA</p>
+            <h3 className="font-medium text-base">{isp?.name}</h3>
+            <p className="text-gray-500 text-sm">{isp?.email}</p>
           </div>
           <Settings className="text-gray-500" />
 

@@ -1,12 +1,20 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
 import { Fragment } from 'react';
 import { CustomButton } from '../../../components/trackerForm';
+import { useAuth } from '../../../core/AuthContext/context';
 import { Modal } from '../components/modal';
-import SimpleTanStackTable from './components/table';
+import RequestServices from '../core/request.services';
+import { RequestsTable } from './components/table';
 
 export default function SolicitudPage() {
+  const { isp } = useAuth();
+  const requestQuery = useQuery({
+    queryKey: ['request', isp?.id || ''],
+    queryFn: () => RequestServices.getRequests(isp?.id),
+  });
   return (
     <Fragment>
       <header className="flex flex-row justify-between items-center mb-8">
@@ -20,11 +28,13 @@ export default function SolicitudPage() {
               text="Nueva Solicitud"
             />
           }
+          isOpen={undefined}
+          onOpenChange={undefined}
         />
       </header>
 
       <section className="w-full shadow-lg rounded-md min-h-7 border border-gray-100">
-        <SimpleTanStackTable />
+        <RequestsTable data={requestQuery.data?.data || []} />
       </section>
     </Fragment>
   );

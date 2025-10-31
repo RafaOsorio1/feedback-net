@@ -1,6 +1,7 @@
 import { Theme } from '@radix-ui/themes';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Toaster } from 'sonner';
+import { AuthProvider } from './core/AuthContext/context';
 import './globals.css';
 import ReactQueryProviders from './providers/reactQueryProviders';
 
@@ -26,8 +27,10 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactQueryProviders>
-          <Toaster position="top-center" duration={5000} richColors />
-          <Theme accentColor="blue">{children}</Theme>
+          <AuthProvider>
+            <Toaster position="top-center" duration={5000} richColors />
+            <Theme accentColor="blue">{children}</Theme>
+          </AuthProvider>
         </ReactQueryProviders>
       </body>
     </html>

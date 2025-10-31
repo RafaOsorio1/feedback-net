@@ -9,10 +9,6 @@ import { useLoginForm } from './core/hooks/loginForm';
 
 export default function LoginPage() {
   const { form, onSubmit, isLoading } = useLoginForm();
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = form;
 
   const router = useRouter();
 
@@ -29,7 +25,7 @@ export default function LoginPage() {
       </div>
 
       <div className="bg-white rounded-lg px-6 py-5 shadow-xl mt-9">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <h2 className="font-semibold text-2xl flex justify-center mb-6 mt-4">
             Iniciar Sesión
           </h2>
@@ -39,7 +35,7 @@ export default function LoginPage() {
             <Controller
               name="email"
               control={form.control}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <div>
                   <InputField
                     type="email"
@@ -51,12 +47,9 @@ export default function LoginPage() {
                     label="Correo Electrónico"
                     placeholder="admin@isp.com"
                     disabled={isLoading}
+                    error={Boolean(fieldState.error)}
+                    helperText={fieldState.error?.message}
                   />
-                  {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
                 </div>
               )}
             />
@@ -65,7 +58,7 @@ export default function LoginPage() {
             <Controller
               name="password"
               control={form.control}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <div>
                   <InputField
                     type="password"
@@ -77,12 +70,9 @@ export default function LoginPage() {
                     label="Contraseña"
                     placeholder="••••••"
                     disabled={isLoading}
+                    error={Boolean(fieldState.error)}
+                    helperText={fieldState.error?.message}
                   />
-                  {errors.password && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.password.message}
-                    </p>
-                  )}
                 </div>
               )}
             />

@@ -3,23 +3,25 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import { AuthContext } from '../../../../core/AuthContext/context';
 import AuthService from '../../../../core/services/auth/services';
+import { setToken } from '../../../../lib/setToken';
 
 const loginSchema = z.object({
   email: z.email('Correo electrónico inválido'),
   password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
 });
 
-export type LoginFormData = z.infer<typeof loginSchema>;
-
 export function useLoginForm() {
   const router = useRouter();
   const toastId = 'login-toast';
+  const { setIsp } = useContext(AuthContext);
 
-  const form = useForm<LoginFormData>({
+  const form = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
@@ -29,18 +31,21 @@ export function useLoginForm() {
 
   const loginMutation = useMutation({
     mutationKey: ['login'],
-    mutationFn: async (data: LoginFormData) => {
-      toast.loading('Iniciando sesión...', { id: toastId });
-      return AuthService.login(data.email, data.password);
-    },
-    onSuccess: () => {
+    mutationFn: AuthService.login,
+    onSuccess: ({ data }) => {
       toast.success('¡Inicio de sesión exitoso!', {
         id: toastId,
         duration: 2000,
       });
+
+      setToken(data.token);
+
+      console.log(data.isp);
+      setIsp(data.isp);
+
       router.push('/dashboard');
     },
-    onError: (error: Error) => {
+    onError: (error) => {
       console.log(error);
       toast.error(
         error.message || 'Error al iniciar sesión. Verifica tus credenciales.',
@@ -49,19 +54,16 @@ export function useLoginForm() {
           duration: 4000,
         },
       );
-      router.push('/login');
     },
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data);
-    loginMutation.mutate(data);
+  const onSubmit = (data) => {
+    loginMutation.mutate({ email: data.email, password: data.password });
   };
 
   return {
     form,
     onSubmit,
     isLoading: loginMutation.isPending,
-    error: loginMutation.error,
   };
 }

@@ -1,318 +1,274 @@
-// src/app/(private)/dashboard/components/modal.jsx
 'use client';
 
-import { AlertDialog, Flex, Select, TextArea } from '@radix-ui/themes';
-import { Send } from 'lucide-react';
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import {
+  AlertDialog,
+  Card,
+  Flex,
+  IconButton,
+  Select,
+  Separator,
+  Text,
+  TextArea,
+} from '@radix-ui/themes';
+import { useQuery } from '@tanstack/react-query';
+import { X } from 'lucide-react';
+import { Controller } from 'react-hook-form';
 import { InputField } from '../../../components/input';
 import { CustomButton } from '../../../components/trackerForm';
+import {
+  RequestType,
+  RequestTypeLabels,
+} from '../../../core/constants/requestTypes';
+import { usePqrForm } from '../../../core/hooks/usePqrForm';
+import ISPsService from '../../../core/services/ISPs/services';
 
-export function Modal({ button }) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export function Modal({ button, isOpen, onOpenChange }) {
+  const { form, onSubmit, isSubmitting } = usePqrForm({
+    defaultValues: {
+      type: '',
+      fullName: '',
+      email: '',
+      phone: '',
+      address: '',
+      subject: '',
+      details: '',
+      ispId: '',
+    },
+  });
 
-  const onSubmit = async (data) => {
-    try {
-      setIsSubmitting(true);
-      // Aquí iría la lógica para enviar el formulario
-      console.log('Datos del formulario:', data);
-      // Simulamos un envío exitoso
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      alert('Solicitud creada exitosamente');
-    } catch (error) {
-      console.error('Error al enviar el formulario:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['get-isps'],
+    queryFn: ISPsService.getISPs,
+  });
+
+  const isps = data?.data ?? [];
+
+  if (isLoading) return <div>Cargando...</div>;
+  if (error) return <div>Error al cargar ISPs</div>;
 
   return (
-    <AlertDialog.Root>
+    <AlertDialog.Root open={isOpen} onOpenChange={onOpenChange}>
       <AlertDialog.Trigger>{button}</AlertDialog.Trigger>
 
-      <AlertDialog.Content
-        style={{
-          maxWidth: '650px',
-          maxHeight: '90vh',
-          overflowY: 'auto',
-          scrollbarWidth: 'thin',
-          padding: '0',
-        }}
-      >
-        <AlertDialog.Title
-          style={{
-            borderBottom: '2px solid #ccc',
-            padding: '20px',
-            position: 'sticky',
-            top: 0,
-            backgroundColor: 'white',
-            zIndex: 10,
-          }}
+      <AlertDialog.Content size="3" className="max-w-3xl rounded-xl shadow-2xl">
+        {/* Header */}
+        <Flex
+          align="center"
+          justify="between"
+          className="p-4 border-b border-gray-200"
         >
-          Nueva Solicitud PQR/S
-        </AlertDialog.Title>
+          <AlertDialog.Title>Nueva Solicitud PQR/S</AlertDialog.Title>
+          <AlertDialog.Cancel>
+            <IconButton variant="ghost" color="gray" size="2" radius="full">
+              <X size={18} />
+            </IconButton>
+          </AlertDialog.Cancel>
+        </Flex>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="p-5 flex flex-col gap-5">
-            <div className="flex flex-col md:flex-row gap-5">
+        {/* Form */}
+        <Card variant="surface" className="p-6 mt-2">
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            {/* Tipo de solicitud */}
+            <div className="space-y-2 mb-5 flex flex-col">
+              <label className="mb-2 font-semibold" htmlFor="type">
+                Tipo de Solicitud *
+              </label>
               <Controller
-                name="requestType"
-                control={control}
-                rules={{ required: 'El tipo de solicitud es requerido' }}
-                render={({ field }) => (
-                  <div className="flex-1">
-                    <label className="block mb-1 text-base font-medium">
-                      Tipo de Solicitud *
-                    </label>
+                name="type"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <>
                     <Select.Root
-                      size="3"
                       value={field.value}
                       onValueChange={field.onChange}
+                      disabled={isSubmitting}
                     >
                       <Select.Trigger
-                        placeholder="Tipo de Solicitud"
-                        className={errors.requestType ? 'border-red-500' : ''}
+                        placeholder="Seleccione un tipo de solicitud"
+                        variant={fieldState.error ? 'soft' : 'surface'}
+                        id="type"
                       />
                       <Select.Content>
-                        <Select.Item value="Petición">Petición</Select.Item>
-                        <Select.Item value="Queja">Queja</Select.Item>
-                        <Select.Item value="Reclamo">Reclamo</Select.Item>
-                        <Select.Item value="Sugerencia">Sugerencia</Select.Item>
+                        {Object.entries(RequestType).map(([key, value]) => (
+                          <Select.Item key={key} value={value}>
+                            {RequestTypeLabels[value]}
+                          </Select.Item>
+                        ))}
                       </Select.Content>
                     </Select.Root>
-                    {errors.requestType && (
-                      <p className="mt-1 text-sm text-red-600">
-                        {errors.requestType?.message?.toString()}
-                      </p>
+                    {fieldState.error && (
+                      <Text size="2" color="red">
+                        {fieldState.error.message}
+                      </Text>
                     )}
-                  </div>
-                )}
-              />
-
-              <Controller
-                name="receptionChannel"
-                control={control}
-                render={({ field }) => (
-                  <div className="flex-1">
-                    <label className="block mb-1 text-base font-medium">
-                      Canal de Recepción
-                    </label>
-                    <Select.Root
-                      size="3"
-                      value={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      <Select.Trigger placeholder="Canal de Recepción" />
-                      <Select.Content>
-                        <Select.Item value="Formulario Web">
-                          Formulario Web
-                        </Select.Item>
-                        <Select.Item value="Email">Email</Select.Item>
-                        <Select.Item value="Telefono">Teléfono</Select.Item>
-                      </Select.Content>
-                    </Select.Root>
-                  </div>
+                  </>
                 )}
               />
             </div>
 
-            <Controller
-              name="priority"
-              control={control}
-              rules={{ required: 'La prioridad es requerida' }}
-              render={({ field }) => (
-                <div className="flex flex-col">
-                  <label className="block mb-1 text-base font-medium">
-                    Prioridad *
-                  </label>
-                  <Select.Root
-                    size="3"
-                    value={field.value}
-                    onValueChange={field.onChange}
-                  >
-                    <Select.Trigger
-                      placeholder="Prioridad"
-                      className={errors.priority ? 'border-red-500' : ''}
-                    />
-                    <Select.Content>
-                      <Select.Item value="Baja">Baja</Select.Item>
-                      <Select.Item value="Media">Media</Select.Item>
-                      <Select.Item value="Alta">Alta</Select.Item>
-                      <Select.Item value="Critica">Crítica</Select.Item>
-                    </Select.Content>
-                  </Select.Root>
-                  {errors.priority && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.priority?.message?.toString()}
-                    </p>
-                  )}
-                </div>
-              )}
-            />
-
-            <h2 className="font-medium text-xl">Información del Usuario</h2>
-
-            <Controller
-              name="fullName"
-              control={control}
-              rules={{ required: 'El nombre completo es requerido' }}
-              render={({ field, fieldState }) => (
-                <InputField
-                  {...field}
-                  label="Nombre Completo *"
-                  placeholder="Nombre Completo del usuario"
-                  error={fieldState.invalid}
-                  helperText={fieldState.error?.message}
-                />
-              )}
-            />
-
-            <Controller
-              name="email"
-              control={control}
-              rules={{
-                required: 'El correo electrónico es requerido',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Correo electrónico inválido',
-                },
-              }}
-              render={({ field, fieldState }) => (
-                <InputField
-                  {...field}
-                  type="email"
-                  label="Email *"
-                  placeholder="correo@ejemplo.com"
-                  error={fieldState.invalid}
-                  helperText={fieldState.error?.message}
-                />
-              )}
-            />
-
-            <Controller
-              name="phone"
-              control={control}
-              rules={{
-                required: 'El teléfono es requerido',
-                pattern: {
-                  value: /^[0-9]{10}$/,
-                  message: 'Número de teléfono inválido',
-                },
-              }}
-              render={({ field, fieldState }) => (
-                <InputField
-                  {...field}
-                  label="Teléfono *"
-                  placeholder="3001234567"
-                  error={fieldState.invalid}
-                  helperText={fieldState.error?.message}
-                />
-              )}
-            />
-
-            <Controller
-              name="address"
-              control={control}
-              render={({ field, fieldState }) => (
-                <InputField
-                  {...field}
-                  label="Dirección"
-                  placeholder="Dirección completa"
-                  error={fieldState.invalid}
-                  helperText={fieldState.error?.message}
-                />
-              )}
-            />
-
-            <h2 className="font-medium text-xl">Detalles de la Solicitud</h2>
-
-            <Controller
-              name="subject"
-              control={control}
-              rules={{ required: 'El asunto es requerido' }}
-              render={({ field, fieldState }) => (
-                <InputField
-                  {...field}
-                  label="Asunto *"
-                  placeholder="Resumen breve del problema o solicitud"
-                  error={fieldState.invalid}
-                  helperText={fieldState.error?.message}
-                />
-              )}
-            />
-
-            <Controller
-              name="description"
-              control={control}
-              rules={{
-                required: 'La descripción es requerida',
-                minLength: {
-                  value: 10,
-                  message: 'La descripción debe tener al menos 10 caracteres',
-                },
-              }}
-              render={({ field, fieldState }) => (
-                <div>
-                  <label className="block mb-1 text-base font-medium">
-                    Descripción Detallada *
-                  </label>
-                  <TextArea
+            {/* Info personal */}
+            <Flex gap="4" direction={{ initial: 'column', md: 'row' }} mb="4">
+              <Controller
+                name="fullName"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <InputField
                     {...field}
-                    placeholder="Describa detalladamente su solicitud, queja, reclamo o sugerencia..."
-                    className={`w-full min-h-[120px] ${
-                      fieldState.invalid ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    label="Nombre completo *"
+                    placeholder="Su nombre completo"
+                    error={fieldState.invalid}
+                    helperText={fieldState.error?.message}
+                    disabled={isSubmitting}
                   />
-                  {fieldState.error && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {fieldState.error.message}
-                    </p>
-                  )}
-                </div>
-              )}
-            />
-          </div>
+                )}
+              />
+              <Controller
+                name="email"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <InputField
+                    {...field}
+                    type="email"
+                    label="Correo electrónico *"
+                    placeholder="su.email@ejemplo.com"
+                    error={fieldState.invalid}
+                    helperText={fieldState.error?.message}
+                    disabled={isSubmitting}
+                  />
+                )}
+              />
+            </Flex>
 
-          <Flex
-            gap="3"
-            justify="end"
-            style={{
-              padding: '20px',
-              position: 'sticky',
-              bottom: 0,
-              backgroundColor: 'white',
-              borderTop: '1px solid #e5e7eb',
-            }}
-          >
-            <AlertDialog.Cancel>
-              <CustomButton
-                size="3"
-                radius="large"
-                text="Cancelar"
-                variant="outline"
-                color="gray"
-                type="button"
-                disabled={isSubmitting}
-                Icon={undefined}
+            <Flex gap="4" direction={{ initial: 'column', md: 'row' }} mb="4">
+              <Controller
+                name="phone"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <InputField
+                    {...field}
+                    type="tel"
+                    label="Teléfono *"
+                    placeholder="3001234567"
+                    error={fieldState.invalid}
+                    helperText={fieldState.error?.message}
+                    disabled={isSubmitting}
+                  />
+                )}
               />
-            </AlertDialog.Cancel>
-            <AlertDialog.Action>
-              <CustomButton
-                size="3"
-                radius="large"
-                Icon={isSubmitting ? null : <Send size={16} />}
-                text={isSubmitting ? 'Enviando...' : 'Enviar Solicitud'}
-                type="submit"
-                disabled={isSubmitting}
+            </Flex>
+
+            <Separator size="4" my="5" />
+
+            {/* Detalle solicitud */}
+            <Flex gap="4" direction={{ initial: 'row' }} mb="4">
+              <Controller
+                name="subject"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <InputField
+                    {...field}
+                    label="Asunto *"
+                    placeholder="Resumen breve de su solicitud"
+                    error={fieldState.invalid}
+                    helperText={fieldState.error?.message}
+                    disabled={isSubmitting}
+                  />
+                )}
               />
-            </AlertDialog.Action>
-          </Flex>
-        </form>
+
+              <Controller
+                name="ispId"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <div className="w-full flex flex-col space-y-2 ">
+                    <label className="mb-2 font-semibold" htmlFor="ispId">
+                      ISP *
+                    </label>
+                    <Select.Root
+                      value={field.value ?? ''}
+                      onValueChange={field.onChange}
+                      disabled={isLoading}
+                      size="3"
+                    >
+                      <Select.Trigger
+                        id="ispId"
+                        placeholder="Seleccione un ISP"
+                      />
+                      <Select.Content>
+                        {Array.isArray(isps) &&
+                          isps.map((isp) => (
+                            <Select.Item key={isp.id} value={isp.id}>
+                              {isp.name}
+                            </Select.Item>
+                          ))}
+                      </Select.Content>
+                    </Select.Root>
+                    {fieldState.error && (
+                      <Text size="2" color="red">
+                        {fieldState.error.message}
+                      </Text>
+                    )}
+                  </div>
+                )}
+              />
+            </Flex>
+
+            <div className="mb-6">
+              <Text as="label" size="3" weight="medium">
+                Descripción detallada *
+              </Text>
+              <Controller
+                name="details"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <>
+                    <TextArea
+                      {...field}
+                      placeholder="Describa detalladamente su solicitud, problema o sugerencia..."
+                      disabled={isSubmitting}
+                      size="3"
+                      className={`mt-2 ${
+                        fieldState.invalid ? 'border-red-500' : ''
+                      }`}
+                    />
+                    {fieldState.error && (
+                      <Text size="2" color="red">
+                        {fieldState.error.message}
+                      </Text>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+
+            {/* Botones */}
+            <Flex
+              justify="end"
+              gap="3"
+              pt="3"
+              mt="6"
+              className="border-t border-gray-200"
+            >
+              <AlertDialog.Cancel>
+                <CustomButton
+                  variant="soft"
+                  color="gray"
+                  text="Cancelar"
+                  disabled={isSubmitting}
+                  Icon={undefined}
+                />
+              </AlertDialog.Cancel>
+              <AlertDialog.Action>
+                <CustomButton
+                  type="submit"
+                  text="Enviar Solicitud"
+                  disabled={isSubmitting}
+                  Icon={undefined}
+                />
+              </AlertDialog.Action>
+            </Flex>
+          </form>
+        </Card>
       </AlertDialog.Content>
     </AlertDialog.Root>
   );
