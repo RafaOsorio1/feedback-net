@@ -18,8 +18,6 @@ export default function DashboardPage() {
     queryFn: () => RequestServices.getRequests(isp?.id),
   });
 
-  console.log(requestQuery.data?.data);
-
   return (
     <Fragment>
       <header className="flex flex-row justify-between items-center mb-8">
@@ -30,7 +28,7 @@ export default function DashboardPage() {
               size="3"
               radius="large"
               Icon={<Plus />}
-              text="Nueva Solicitud"
+              text="New Request"
             />
           }
           isOpen={undefined}
@@ -43,7 +41,7 @@ export default function DashboardPage() {
           <div className="flex flex-col mt-4 border border-gray-200 rounded-2xl shadow-sm overflow-hidden h-full">
             <header className="flex flex-row items-center gap-4 w-full border-b border-gray-200 p-4 bg-white z-10">
               <Clock className="w-6 h-6 text-blue-500" />
-              <h3 className="text-lg font-semibold">Actividad Reciente</h3>
+              <h3 className="text-lg font-semibold">Recent Activity</h3>
             </header>
             {/* Contenedor con altura fija y scroll */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 max-h-[calc(100vh-600px)]">
@@ -62,7 +60,7 @@ export default function DashboardPage() {
           </div>
         </section>
         <section className="col-span-4 mt-4 flex flex-col gap-4 border border-gray-200 rounded-2xl shadow-sm p-4">
-          <h3 className="text-lg font-semibold">Acciones Rápidas</h3>
+          <h3 className="text-lg font-semibold">Quick Actions</h3>
           <Modal
             button={
               <CustomButton
@@ -70,7 +68,7 @@ export default function DashboardPage() {
                 radius="large"
                 variant="soft"
                 Icon={<Plus />}
-                text="Nueva Solicitud PQR/S"
+                text="New PQR/S Request"
                 style={{
                   width: '100%',
                   display: 'flex',
@@ -87,7 +85,7 @@ export default function DashboardPage() {
             radius="large"
             variant="soft"
             Icon={<ChartColumnIncreasing />}
-            text="Generar reporte"
+            text="Generate report"
             style={{
               width: '100%',
               display: 'flex',
@@ -100,7 +98,7 @@ export default function DashboardPage() {
             radius="large"
             variant="soft"
             Icon={<TrendingUp />}
-            text="Ver Analítica"
+            text="View Analytics"
             style={{
               width: '100%',
               display: 'flex',

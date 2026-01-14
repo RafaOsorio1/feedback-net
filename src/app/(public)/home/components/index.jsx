@@ -3,13 +3,14 @@
 import { FormProvider } from 'react-hook-form';
 import { FormFields } from './formFields';
 
-import { usePqrForm } from '../../../core/hooks/usePqrForm';
+import { useRequestForm } from '../../../core/hooks/useRequestForm';
 import { FormFooter } from './FormFooter';
 import { FormHeader } from './formHeader';
 import { NotificationModal } from './NotificationModal';
+import { RequestCreatedModal } from './requestCreateModal';
 
-export function PqrForm() {
-  const { form, onSubmit, isSubmitting } = usePqrForm({
+export function RequestForm() {
+  const { form, onSubmit, isSubmitting } = useRequestForm({
     defaultValues: {
       fullName: '',
       email: '',
@@ -27,6 +28,7 @@ export function PqrForm() {
       <div className="max-w-4xl p-4 mx-auto">
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
+            <RequestCreatedModal />
             <NotificationModal />
             <FormHeader />
             <FormFields />

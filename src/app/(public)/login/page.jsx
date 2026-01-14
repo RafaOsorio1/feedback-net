@@ -20,14 +20,14 @@ export default function LoginPage() {
         </div>
         <h1 className="text-4xl font-extrabold text-center">FeedbackNet</h1>
         <p className="text-center text-sm font-medium">
-          Sistema de Gestion PQR/S para ISPs
+          PQR/S Management System for ISPs
         </p>
       </div>
 
       <div className="bg-white rounded-lg px-6 py-5 shadow-xl mt-9">
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <h2 className="font-semibold text-2xl flex justify-center mb-6 mt-4">
-            Iniciar Sesión
+            Log In
           </h2>
 
           <div className="space-y-4">
@@ -44,7 +44,7 @@ export default function LoginPage() {
                     onChange={field.onChange}
                     value={field.value}
                     icon={<MailIcon />}
-                    label="Correo Electrónico"
+                    label="Email Address"
                     placeholder="admin@isp.com"
                     disabled={isLoading}
                     error={Boolean(fieldState.error)}
@@ -67,7 +67,7 @@ export default function LoginPage() {
                     onChange={field.onChange}
                     value={field.value}
                     icon={<KeyRound />}
-                    label="Contraseña"
+                    label="Password"
                     placeholder="••••••"
                     disabled={isLoading}
                     error={Boolean(fieldState.error)}
@@ -83,7 +83,7 @@ export default function LoginPage() {
             size="3"
             radius="large"
             Icon={<LogOut />}
-            text={isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+            text={isLoading ? 'Logging in...' : 'Log In'}
             style={{
               margin: '20px 0px',
               width: '100%',
@@ -93,29 +93,27 @@ export default function LoginPage() {
         </form>
 
         <div className="bg-gray-100 rounded-lg p-4 mt-6 mb-7">
-          <p className="font-semibold text-base mb-2">
-            Credenciales de demostración:
-          </p>
-          <p className="text-sm">Email: admin@isp.com</p>
-          <p className="text-sm">Contraseña: password</p>
+          <p className="font-semibold text-base mb-2">Demo credentials:</p>
+          <p className="text-sm">Email: contacto@hiperconexion.com</p>
+          <p className="text-sm">Password: password123</p>
         </div>
 
         <div className="flex flex-row gap-2 font-medium mb-4 justify-center">
-          <p className="text-gray-600">¿No tienes cuenta?</p>
+          <p className="text-gray-600">Don't have an account?</p>
           <button
             type="submit"
             onClick={() => router.push('/register')}
             className="text-blue-600 font-medium hover:underline"
             disabled={isLoading}
           >
-            Registrar mi ISP
+            Register my ISP
           </button>
         </div>
       </div>
 
       <div className="text-center mt-10">
         <p className="text-white text-sm">
-          Cumplimiento Resolución CRC 6242 de 2021
+          Compliance with CRC Resolution 6242 of 2021
         </p>
       </div>
     </section>

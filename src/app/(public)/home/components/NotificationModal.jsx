@@ -34,12 +34,13 @@ export function NotificationModal() {
             </Box>
 
             <AlertDialog.Title align="center">
-              {notificationModal.data?.title || '¡Solicitud enviada con éxito!'}
+              {notificationModal.data?.title ||
+                'Request submitted successfully!'}
             </AlertDialog.Title>
 
             <Text align="center" color="gray">
               {notificationModal.data?.message ||
-                'Hemos recibido tu solicitud correctamente.'}
+                'We have correctly received your request.'}
             </Text>
 
             {notificationModal.data?.referenceNumber && (
@@ -54,7 +55,7 @@ export function NotificationModal() {
                 }}
               >
                 <Text size="2" weight="bold" color="gray">
-                  Número de referencia:
+                  Reference number:
                 </Text>
                 <Text size="5" weight="bold">
                   {notificationModal.data.referenceNumber}
@@ -66,7 +67,7 @@ export function NotificationModal() {
 
         <Flex gap="3" mt="4" justify="end">
           <Button variant="soft" color="gray" onClick={handleClose}>
-            Cerrar
+            Close
           </Button>
         </Flex>
       </AlertDialog.Content>

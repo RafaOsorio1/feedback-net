@@ -3,29 +3,30 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import PqrFormService from '../services/pqrForm/services';
+import { useRequestStore } from '../../(public)/home/core/store';
+import RequestFormService from '../services/requestForm/services';
 
 const schema = z.object({
-  fullName: z.string().min(1, 'El nombre es requerido'),
-  ispId: z.string().min(1, 'El ISP es requerido'),
-  phone: z.string().min(1, 'El telefono es requerido'),
+  fullName: z.string().min(1, 'Name is required'),
+  ispId: z.string().min(1, 'ISP is required'),
+  phone: z.string().min(1, 'Phone is required'),
   address: z.string().optional(),
-  email: z.email('El correo es requerido'),
-  subject: z.string().min(1, 'El asunto es requerido'),
-  details: z.string().min(1, 'El mensaje es requerido'),
+  email: z.string().email('Email is required'),
+  subject: z.string().min(1, 'Subject is required'),
+  details: z.string().min(1, 'Message is required'),
   type: z
     .string()
-    .min(1, 'Por favor selecciona un tipo de solicitud')
+    .min(1, 'Please select a request type')
     .refine(
       (value) =>
         ['PETITION', 'COMPLAINT', 'CLAIM', 'SUGGESTION'].includes(value),
       {
-        message: 'Tipo de solicitud no válido',
+        message: 'Invalid request type',
       },
     ),
 });
 
-export function usePqrForm({
+export function useRequestForm({
   defaultValues = {
     fullName: '',
     email: '',
@@ -37,18 +38,20 @@ export function usePqrForm({
     ispId: '',
   },
 }) {
+  const { openModal } = useRequestStore();
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
   const mutation = useMutation({
-    mutationFn: PqrFormService.createPqr,
-    onSuccess: () => {
-      toast.success('PQR creada exitosamente');
+    mutationFn: RequestFormService.createRequest,
+    onSuccess: ({ data }) => {
+      openModal(data);
+      toast.success('Request created successfully');
     },
     onError: () => {
-      toast.error('Error al crear la PQR');
+      toast.error('Error creating request');
     },
     onSettled: () => {
       form.reset();
@@ -56,13 +59,14 @@ export function usePqrForm({
   });
 
   const onSubmit = (data) => {
-    console.log('Datos del formulario:', data);
     mutation.mutate(data, {
       onSuccess: (response) => {
-        console.log('Respuesta del servidor:', response);
+        toast.success(
+          `Request created successfully - ${response.data.referenceNumber}`,
+        );
       },
       onError: (error) => {
-        console.error('Error al enviar el formulario:', error);
+        toast.error(error.message);
       },
     });
   };

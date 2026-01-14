@@ -40,7 +40,7 @@ export function Pqrs({ subject, fullName, status, type, createdAt, isp }) {
               )}
             </div>
             <p className="text-gray-500 text-sm">
-              {DateTime.fromISO(createdAt).setLocale('es').toRelative()}
+              {DateTime.fromISO(createdAt).setLocale('en').toRelative()}
             </p>
           </div>
         </div>
@@ -51,22 +51,22 @@ export function Pqrs({ subject, fullName, status, type, createdAt, isp }) {
 
 const statusConfig = {
   [RequestStatus.PENDING]: {
-    label: 'Pendiente',
+    label: 'Pending',
     color: 'blue',
     icon: <Clock className="w-3 h-3" />,
   },
   [RequestStatus.IN_PROGRESS]: {
-    label: 'En Progreso',
+    label: 'In Progress',
     color: 'yellow',
     icon: <Clock className="w-3 h-3" />,
   },
   [RequestStatus.RESOLVED]: {
-    label: 'Resuelto',
+    label: 'Resolved',
     color: 'green',
     icon: <CheckCircle className="w-3 h-3" />,
   },
   [RequestStatus.CANCELED]: {
-    label: 'Cancelado',
+    label: 'Canceled',
     color: 'red',
     icon: <XCircle className="w-3 h-3" />,
   },
@@ -93,16 +93,16 @@ export function PriorityBadge({ priority }) {
   let color = 'blue';
 
   switch (priority) {
-    case 'Alta':
+    case 'High':
       color = 'orange';
       break;
-    case 'Media':
+    case 'Medium':
       color = 'yellow';
       break;
-    case 'Critica':
+    case 'Critical':
       color = 'red';
       break;
-    case 'Baja':
+    case 'Low':
       color = 'green';
       break;
     default:

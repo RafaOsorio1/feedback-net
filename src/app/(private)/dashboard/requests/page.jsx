@@ -8,9 +8,10 @@ import { useAuth } from '../../../core/AuthContext/context';
 import { Modal } from '../components/modal';
 import RequestServices from '../core/request.services';
 import { RequestDetailsModal } from './components/RequestDetailsModal';
+import { ResponseModal } from './components/responseModal';
 import { RequestsTable } from './components/table';
 
-export default function SolicitudPage() {
+export default function RequestPage() {
   const { isp } = useAuth();
   const requestQuery = useQuery({
     queryKey: ['request', isp?.id || ''],
@@ -22,14 +23,14 @@ export default function SolicitudPage() {
   return (
     <Fragment>
       <header className="flex flex-row justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">Gestión de Solicitudes PQR/S</h1>
+        <h1 className="text-2xl font-bold">PQR/S Request Management</h1>
         <Modal
           button={
             <CustomButton
               size="3"
               radius="large"
               Icon={<Plus />}
-              text="Nueva Solicitud"
+              text="New Request"
             />
           }
           isOpen={undefined}
@@ -43,6 +44,7 @@ export default function SolicitudPage() {
 
       {/* Request Details Modal */}
       <RequestDetailsModal />
+      <ResponseModal />
     </Fragment>
   );
 }

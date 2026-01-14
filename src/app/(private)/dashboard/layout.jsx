@@ -32,45 +32,45 @@ export default function DashboardLayout({ children }) {
     },
     {
       icon: <MessageSquare />,
-      label: 'Solicitudes PQR/S',
+      label: 'PQR/S Requests',
       notificaciones: 3,
-      href: '/dashboard/solicitudes',
+      href: '/dashboard/requests',
     },
     {
       icon: <ChartColumn />,
-      label: 'Analítica',
+      label: 'Analytics',
       notificaciones: 0,
-      href: '/dashboard/analitica',
+      href: '/dashboard/analytics',
     },
     {
       icon: <FileText />,
-      label: 'Reportes',
+      label: 'Reports',
       notificaciones: 0,
-      href: '/dashboard/reportes',
+      href: '/dashboard/reports',
     },
     {
       icon: <MessageCircle />,
-      label: 'Plantillas',
+      label: 'Templates',
       notificaciones: 0,
-      href: '/dashboard/plantillas',
+      href: '/dashboard/templates',
     },
     {
       icon: <CircleAlert />,
-      label: 'Alertas',
+      label: 'Alerts',
       notificaciones: 0,
-      href: '/dashboard/alertas',
+      href: '/dashboard/alerts',
     },
     {
       icon: <Users />,
-      label: 'Usuarios',
+      label: 'Users',
       notificaciones: 0,
-      href: '/dashboard/usuarios',
+      href: '/dashboard/users',
     },
     {
       icon: <Settings />,
-      label: 'Configuración',
+      label: 'Settings',
       notificaciones: 0,
-      href: '/dashboard/configuracion',
+      href: '/dashboard/settings',
     },
   ];
 
@@ -79,7 +79,7 @@ export default function DashboardLayout({ children }) {
       <header className="fixed top-0 left-0 right-0 flex flex-row justify-between p-4 px-8 h-20 border-b border-gray-200 shadow-sm bg-white z-10">
         <div className="flex flex-col">
           <h1 className="text-blue-600 font-bold text-3xl">FeedbackNet</h1>
-          <p className="text-gray-500">Sistema de Gestión PQR/S</p>
+          <p className="text-gray-500">PQR/S Management System</p>
         </div>
 
         <div className="flex flex-row gap-9 justify-center items-center">
@@ -92,7 +92,7 @@ export default function DashboardLayout({ children }) {
 
           <CustomButton
             Icon={<LogOut />}
-            text="Salir"
+            text="Logout"
             size="2"
             onClick={() => {
               router.push('/login');

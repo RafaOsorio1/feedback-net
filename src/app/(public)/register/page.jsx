@@ -12,11 +12,11 @@ import { CustomButton } from '../../components/trackerForm';
 import AuthService from '../../core/services/auth/services';
 
 const registerSchema = z.object({
-  name: z.string().min(3, 'El nombre debe tener al menos 3 caracteres'),
-  email: z.string().email('Correo electrónico inválido'),
-  password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
-  address: z.string().min(5, 'La dirección es requerida'),
-  phone: z.string().min(7, 'El teléfono es requerido'),
+  name: z.string().min(3, 'Name must be at least 3 characters'),
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+  address: z.string().min(5, 'Address is required'),
+  phone: z.string().min(7, 'Phone is required'),
 });
 
 export default function RegisterPage() {
@@ -39,10 +39,10 @@ export default function RegisterPage() {
   });
 
   const onSubmit = async (data) => {
-    toast.loading('Creando cuenta...', { id: toastId });
+    toast.loading('Creating account...', { id: toastId });
     await AuthService.register(data);
 
-    toast.success('¡Cuenta creada exitosamente!', {
+    toast.success('Account created successfully!', {
       id: toastId,
       duration: 2000,
     });
@@ -61,14 +61,14 @@ export default function RegisterPage() {
         </div>
         <h1 className="text-4xl font-extrabold text-center">FeedbackNet</h1>
         <p className="text-center text-sm font-medium">
-          Sistema de Gestion PQR/S para ISPs
+          PQR/S Management System for ISPs
         </p>
       </div>
 
       <div className="bg-white rounded-lg px-6 py-5 shadow-xl mt-9">
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2 className="font-semibold text-2xl flex justify-center mb-6 mt-4">
-            Crear Cuenta
+            Create Account
           </h2>
 
           <div className="space-y-4">
@@ -85,15 +85,12 @@ export default function RegisterPage() {
                     onChange={field.onChange}
                     value={field.value}
                     icon={<User size={18} />}
-                    label="Nombre Completo"
-                    placeholder="Juan Pérez"
+                    label="Full Name"
+                    placeholder="John Doe"
                     disabled={isSubmitting}
+                    error={Boolean(errors.name)}
+                    helperText={errors.name?.message}
                   />
-                  {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.name.message}
-                    </p>
-                  )}
                 </div>
               )}
             />
@@ -111,15 +108,12 @@ export default function RegisterPage() {
                     onChange={field.onChange}
                     value={field.value}
                     icon={<MailIcon size={18} />}
-                    label="Correo Electrónico"
-                    placeholder="usuario@isp.com"
+                    label="Email Address"
+                    placeholder="user@isp.com"
                     disabled={isSubmitting}
+                    error={Boolean(errors.email)}
+                    helperText={errors.email?.message}
                   />
-                  {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
                 </div>
               )}
             />
@@ -137,15 +131,12 @@ export default function RegisterPage() {
                     onChange={field.onChange}
                     value={field.value}
                     icon={<KeyRound size={18} />}
-                    label="Contraseña"
+                    label="Password"
                     placeholder="••••••"
                     disabled={isSubmitting}
+                    error={Boolean(errors.password)}
+                    helperText={errors.password?.message}
                   />
-                  {errors.password && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.password.message}
-                    </p>
-                  )}
                 </div>
               )}
             />
@@ -163,15 +154,12 @@ export default function RegisterPage() {
                     onChange={field.onChange}
                     value={field.value}
                     icon={<Home size={18} />}
-                    label="Dirección"
-                    placeholder="Calle 123 #45-67"
+                    label="Address"
+                    placeholder="123 Main St"
                     disabled={isSubmitting}
+                    error={Boolean(errors.address)}
+                    helperText={errors.address?.message}
                   />
-                  {errors.address && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.address.message}
-                    </p>
-                  )}
                 </div>
               )}
             />
@@ -189,15 +177,12 @@ export default function RegisterPage() {
                     onChange={field.onChange}
                     value={field.value}
                     icon={<Phone size={18} />}
-                    label="Teléfono"
+                    label="Phone"
                     placeholder="+57 300 123 4567"
                     disabled={isSubmitting}
+                    error={Boolean(errors.phone)}
+                    helperText={errors.phone?.message}
                   />
-                  {errors.phone && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.phone.message}
-                    </p>
-                  )}
                 </div>
               )}
             />
@@ -207,7 +192,7 @@ export default function RegisterPage() {
             type="submit"
             size="3"
             radius="large"
-            text={isSubmitting ? 'Creando cuenta...' : 'Registrarse'}
+            text={isSubmitting ? 'Creating account...' : 'Register'}
             style={{
               margin: '20px 0px',
               width: '100%',
@@ -218,12 +203,12 @@ export default function RegisterPage() {
         </form>
 
         <div className="flex flex-row gap-2 font-medium mt-6 justify-center">
-          <p className="text-gray-600">¿Ya tienes una cuenta?</p>
+          <p className="text-gray-600">Already have an account?</p>
           <Link
             href="/login"
             className="text-blue-600 font-medium hover:underline"
           >
-            Iniciar sesión
+            Log in
           </Link>
         </div>
       </div>

@@ -76,8 +76,6 @@ export const AuthProvider = ({ children }) => {
     }));
   };
 
-  console.log('isp', isp);
-
   return (
     <AuthContext.Provider
       value={{

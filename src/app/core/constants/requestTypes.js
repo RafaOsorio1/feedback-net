@@ -7,17 +7,17 @@ export const RequestType = {
 };
 
 export const RequestTypeLabels = {
-  [RequestType.PETITION]: 'Petición',
-  [RequestType.COMPLAINT]: 'Queja',
-  [RequestType.CLAIM]: 'Reclamo',
-  [RequestType.SUGGESTION]: 'Sugerencia',
+  [RequestType.PETITION]: 'Petition',
+  [RequestType.COMPLAINT]: 'Complaint',
+  [RequestType.CLAIM]: 'Claim',
+  [RequestType.SUGGESTION]: 'Suggestion',
 };
 
 export const RequestTypeDescriptions = {
-  [RequestType.PETITION]: 'Solicitud de información, servicios o trámites',
-  [RequestType.COMPLAINT]: 'Manifestación de insatisfacción por un servicio',
-  [RequestType.CLAIM]: 'Solicitud de corrección o compensación',
-  [RequestType.SUGGESTION]: 'Propuesta de mejora o recomendación',
+  [RequestType.PETITION]: 'Request for information, services or procedures',
+  [RequestType.COMPLAINT]: 'Expression of dissatisfaction with a service',
+  [RequestType.CLAIM]: 'Request for correction or compensation',
+  [RequestType.SUGGESTION]: 'Improvement proposal or recommendation',
 };
 export const RequestStatus = {
   PENDING: 'PENDING',

@@ -19,11 +19,11 @@ import {
   RequestType,
   RequestTypeLabels,
 } from '../../../core/constants/requestTypes';
-import { usePqrForm } from '../../../core/hooks/usePqrForm';
+import { useRequestForm } from '../../../core/hooks/useRequestForm';
 import ISPsService from '../../../core/services/ISPs/services';
 
 export function Modal({ button, isOpen, onOpenChange }) {
-  const { form, onSubmit, isSubmitting } = usePqrForm({
+  const { form, onSubmit, isSubmitting } = useRequestForm({
     defaultValues: {
       type: '',
       fullName: '',
@@ -43,8 +43,8 @@ export function Modal({ button, isOpen, onOpenChange }) {
 
   const isps = data?.data ?? [];
 
-  if (isLoading) return <div>Cargando...</div>;
-  if (error) return <div>Error al cargar ISPs</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading ISPs</div>;
 
   return (
     <AlertDialog.Root open={isOpen} onOpenChange={onOpenChange}>
@@ -57,7 +57,7 @@ export function Modal({ button, isOpen, onOpenChange }) {
           justify="between"
           className="p-4 border-b border-gray-200"
         >
-          <AlertDialog.Title>Nueva Solicitud PQR/S</AlertDialog.Title>
+          <AlertDialog.Title>New PQR/S Request</AlertDialog.Title>
           <AlertDialog.Cancel>
             <IconButton variant="ghost" color="gray" size="2" radius="full">
               <X size={18} />
@@ -71,7 +71,7 @@ export function Modal({ button, isOpen, onOpenChange }) {
             {/* Tipo de solicitud */}
             <div className="space-y-2 mb-5 flex flex-col">
               <label className="mb-2 font-semibold" htmlFor="type">
-                Tipo de Solicitud *
+                Request Type *
               </label>
               <Controller
                 name="type"
@@ -84,7 +84,7 @@ export function Modal({ button, isOpen, onOpenChange }) {
                       disabled={isSubmitting}
                     >
                       <Select.Trigger
-                        placeholder="Seleccione un tipo de solicitud"
+                        placeholder="Select a request type"
                         variant={fieldState.error ? 'soft' : 'surface'}
                         id="type"
                       />
@@ -114,8 +114,8 @@ export function Modal({ button, isOpen, onOpenChange }) {
                 render={({ field, fieldState }) => (
                   <InputField
                     {...field}
-                    label="Nombre completo *"
-                    placeholder="Su nombre completo"
+                    label="Full name *"
+                    placeholder="Your full name"
                     error={fieldState.invalid}
                     helperText={fieldState.error?.message}
                     disabled={isSubmitting}
@@ -129,8 +129,8 @@ export function Modal({ button, isOpen, onOpenChange }) {
                   <InputField
                     {...field}
                     type="email"
-                    label="Correo electrónico *"
-                    placeholder="su.email@ejemplo.com"
+                    label="Email address *"
+                    placeholder="your.email@example.com"
                     error={fieldState.invalid}
                     helperText={fieldState.error?.message}
                     disabled={isSubmitting}
@@ -147,7 +147,7 @@ export function Modal({ button, isOpen, onOpenChange }) {
                   <InputField
                     {...field}
                     type="tel"
-                    label="Teléfono *"
+                    label="Phone *"
                     placeholder="3001234567"
                     error={fieldState.invalid}
                     helperText={fieldState.error?.message}
@@ -167,8 +167,8 @@ export function Modal({ button, isOpen, onOpenChange }) {
                 render={({ field, fieldState }) => (
                   <InputField
                     {...field}
-                    label="Asunto *"
-                    placeholder="Resumen breve de su solicitud"
+                    label="Subject *"
+                    placeholder="Brief summary of your request"
                     error={fieldState.invalid}
                     helperText={fieldState.error?.message}
                     disabled={isSubmitting}
@@ -190,10 +190,7 @@ export function Modal({ button, isOpen, onOpenChange }) {
                       disabled={isLoading}
                       size="3"
                     >
-                      <Select.Trigger
-                        id="ispId"
-                        placeholder="Seleccione un ISP"
-                      />
+                      <Select.Trigger id="ispId" placeholder="Select an ISP" />
                       <Select.Content>
                         {Array.isArray(isps) &&
                           isps.map((isp) => (
@@ -215,7 +212,7 @@ export function Modal({ button, isOpen, onOpenChange }) {
 
             <div className="mb-6">
               <Text as="label" size="3" weight="medium">
-                Descripción detallada *
+                Detailed description *
               </Text>
               <Controller
                 name="details"
@@ -224,7 +221,7 @@ export function Modal({ button, isOpen, onOpenChange }) {
                   <>
                     <TextArea
                       {...field}
-                      placeholder="Describa detalladamente su solicitud, problema o sugerencia..."
+                      placeholder="Describe your request, problem or suggestion in detail..."
                       disabled={isSubmitting}
                       size="3"
                       className={`mt-2 ${
@@ -253,7 +250,7 @@ export function Modal({ button, isOpen, onOpenChange }) {
                 <CustomButton
                   variant="soft"
                   color="gray"
-                  text="Cancelar"
+                  text="Cancel"
                   disabled={isSubmitting}
                   Icon={undefined}
                 />
@@ -261,7 +258,7 @@ export function Modal({ button, isOpen, onOpenChange }) {
               <AlertDialog.Action>
                 <CustomButton
                   type="submit"
-                  text="Enviar Solicitud"
+                  text="Submit Request"
                   disabled={isSubmitting}
                   Icon={undefined}
                 />

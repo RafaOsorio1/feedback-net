@@ -26,7 +26,7 @@ export default function PublicLayout({ children }) {
 
             <div className="flex flex-col">
               <h1 className="text-2xl font-bold">FeedbackNet</h1>
-              <p className="text-gray-600 font-medium">Portal PQR/S</p>
+              <p className="text-gray-600 font-medium">PQR/S Portal</p>
             </div>
           </div>
           <div className="flex flex-row items-center gap-10">
@@ -56,14 +56,14 @@ export default function PublicLayout({ children }) {
                 <h1 className="text-white font-bold text-lg">FeedbackNet</h1>
               </div>
               <p className="text-white py-3">
-                Plataforma especializada en gestión de PQR/S para proveedores de
-                servicios de internet en Colombia. Cumplimos con la Resolución
-                CRC 6242 de 2021.
+                Platform specialized in PQR/S management for internet service
+                providers in Colombia. We comply with CRC Resolution 6242 of
+                2021.
               </p>
-              <p className="text-emerald-300">Certificado CRC 6242 de 2021</p>
+              <p className="text-emerald-300">CRC 6242 Certificate of 2021</p>
             </section>
             <section className="flex flex-col justify-center mb-8 lg:mb-0">
-              <h1 className="text-white font-bold text-lg pb-3">Contacto</h1>
+              <h1 className="text-white font-bold text-lg pb-3">Contact</h1>
               <div className="flex flex-col gap-3">
                 <LayoutItem
                   Icon={<Phone className="text-white" />}
@@ -79,7 +79,7 @@ export default function PublicLayout({ children }) {
 
                 <LayoutItem
                   Icon={<Clock8 className="text-white" />}
-                  label="Lun - Vie: 8:00 AM - 6:00 PM"
+                  label="Mon - Fri: 8:00 AM - 6:00 PM"
                   label1={undefined}
                 />
               </div>
@@ -87,18 +87,18 @@ export default function PublicLayout({ children }) {
             <section className="flex justify-end">
               <div>
                 <h1 className="text-white font-bold text-lg pb-3">Legal</h1>
-                <p className="text-white pb-3">Términos y Condiciones</p>
-                <p className="text-white pb-3">Política de Privacidad</p>
-                <p className="text-white pb-3">Tratamiento de Datos</p>
-                <p className="text-white pb-3">Resolución CRC 6242</p>
+                <p className="text-white pb-3">Terms and Conditions</p>
+                <p className="text-white pb-3">Privacy Policy</p>
+                <p className="text-white pb-3">Data Processing</p>
+                <p className="text-white pb-3">CRC Resolution 6242</p>
               </div>
             </section>
           </div>
           <section className="flex flex-col text-gray-400 justify-center items-center py-9 text-center">
-            <p>© 2024 FeedbackNet. Todos los derechos reservados.</p>
+            <p>© 2024 FeedbackNet. All rights reserved.</p>
             <p>
-              Sistema certificado para cumplimiento normativo de
-              telecomunicaciones en Colombia.
+              Certified system for telecommunications regulatory compliance in
+              Colombia.
             </p>
           </section>
         </footer>
@@ -106,7 +106,7 @@ export default function PublicLayout({ children }) {
       <div className="fixed bottom-6 right-6 z-50">
         <CustomButton
           Icon={<Building />}
-          text="Portal ISP"
+          text="ISP Portal"
           size="3"
           radius="large"
           onClick={() => router.push('/login')}

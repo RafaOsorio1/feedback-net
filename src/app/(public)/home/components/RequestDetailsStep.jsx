@@ -17,16 +17,16 @@ export function RequestDetailsStep() {
   const isps = data?.data ?? [];
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error al cargar ISPs</div>;
+    return <div>Error loading ISPs</div>;
   }
 
   return (
     <section>
-      <h4 className="font-semibold text-2xl mb-4">Detalles de la Solicitud</h4>
+      <h4 className="font-semibold text-2xl mb-4">Request Details</h4>
 
       <div className="space-y-6 w-full">
         <div className="flex flex-col md:flex-row gap-4 w-full">
@@ -37,8 +37,8 @@ export function RequestDetailsStep() {
                 <InputField
                   {...field}
                   icon={<FileText size={20} />}
-                  label="Asunto *"
-                  placeholder="Resumen breve de su solicitud"
+                  label="Subject *"
+                  placeholder="Brief summary of your request"
                   error={fieldState.invalid}
                   helperText={fieldState.error?.message}
                 />
@@ -62,18 +62,18 @@ export function RequestDetailsStep() {
                   >
                     <Select.Trigger
                       radius="large"
-                      placeholder="Seleccione un ISP"
+                      placeholder="Select an ISP"
                       className="flex-1"
                     />
                     <Select.Content position="popper">
                       {isLoading && (
                         <Select.Item value="loading" disabled>
-                          Cargando...
+                          Loading...
                         </Select.Item>
                       )}
                       {error && (
                         <Select.Item value="error" disabled>
-                          Error al cargar ISPs
+                          Error loading ISPs
                         </Select.Item>
                       )}
                       {Array.isArray(isps) &&
@@ -99,7 +99,7 @@ export function RequestDetailsStep() {
           <div className="flex items-center gap-2 mb-2">
             <MessageCircle className="text-gray-600" size={20} />
             <label className="text-sm font-medium text-gray-700">
-              Descripción detallada *
+              Detailed description *
             </label>
           </div>
 
@@ -113,7 +113,7 @@ export function RequestDetailsStep() {
                   className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                     fieldState.error ? 'border-red-500' : 'border-gray-300'
                   }`}
-                  placeholder="Describa detalladamente su solicitud, problema o sugerencia..."
+                  placeholder="Describe your request, problem or suggestion in detail..."
                 />
                 {fieldState.error && (
                   <p className="mt-1 text-sm text-red-600">

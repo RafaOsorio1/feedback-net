@@ -40,13 +40,11 @@ export function useLoginForm() {
 
       setToken(data.token);
 
-      console.log(data.isp);
       setIsp(data.isp);
 
       router.push('/dashboard');
     },
     onError: (error) => {
-      console.log(error);
       toast.error(
         error.message || 'Error al iniciar sesión. Verifica tus credenciales.',
         {

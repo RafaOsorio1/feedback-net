@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: 'FeedbackNet',
-  description: 'Sistema de PQR/S',
+  description: 'PQR/S Management System',
 };
 
 export default function RootLayout({ children }) {

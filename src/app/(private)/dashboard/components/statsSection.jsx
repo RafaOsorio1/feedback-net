@@ -72,7 +72,6 @@ export function StatsSection() {
     {},
   );
 
-  console.log('statusCounts', statusCounts);
   // Obtener los totales
   const totalRequests = data.length;
   const pendingRequests = statusCounts['PENDING'] || 0;
@@ -85,7 +84,7 @@ export function StatsSection() {
       <div className="flex flex-col gap-4 flex-wrap">
         <div className="flex flex-row flex-1 gap-4">
           <StatCard
-            name="Total de Solicitudes"
+            name="Total Requests"
             value={totalRequests}
             icon={<MessageSquare />}
             iconColor="bg-blue-600"
@@ -93,7 +92,7 @@ export function StatsSection() {
             newValue={totalRequests}
           />
           <StatCard
-            name="Pendientes"
+            name="Pending"
             value={pendingRequests}
             icon={<Clock />}
             iconColor="bg-yellow-400"
@@ -101,7 +100,7 @@ export function StatsSection() {
             newValue={pendingRequests}
           />
           <StatCard
-            name="Completadas"
+            name="Completed"
             value={completedRequests}
             icon={<CheckCircle />}
             iconColor="bg-green-500"
@@ -111,7 +110,7 @@ export function StatsSection() {
         </div>
         <div className="flex flex-row flex-1 gap-4">
           <StatCard
-            name="Canceladas"
+            name="Canceled"
             value={canceledRequests}
             icon={<TriangleAlert />}
             iconColor="bg-red-500"
@@ -119,7 +118,7 @@ export function StatsSection() {
             newValue={canceledRequests}
           />
           <StatCard
-            name="En Progreso"
+            name="In Progress"
             value={inProgressRequests}
             icon={<TrendingUp />}
             iconColor="bg-purple-600"
@@ -127,7 +126,7 @@ export function StatsSection() {
             newValue={inProgressRequests}
           />
           <StatCard
-            name="Usuarios activos"
+            name="Active Users"
             value="3"
             icon={<Users />}
             iconColor="bg-pink-500"

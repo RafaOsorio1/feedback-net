@@ -7,7 +7,7 @@ import { InputField } from '../../../components/input';
 export function PersonalInfoStep() {
   return (
     <section>
-      <h4 className="font-semibold text-2xl mb-4">Datos Personales</h4>
+      <h4 className="font-semibold text-2xl mb-4">Personal Information</h4>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Controller
           name="fullName"
@@ -15,8 +15,8 @@ export function PersonalInfoStep() {
             <InputField
               {...field}
               icon={<UserRound size={20} />}
-              label="Nombre completo *"
-              placeholder="Su nombre completo"
+              label="Full name *"
+              placeholder="Your full name"
               error={fieldState.invalid}
               helperText={fieldState.error?.message}
             />
@@ -29,8 +29,8 @@ export function PersonalInfoStep() {
               {...field}
               type="email"
               icon={<MailIcon size={20} />}
-              label="Correo electrónico *"
-              placeholder="su.email@ejemplo.com"
+              label="Email address *"
+              placeholder="your.email@example.com"
               error={fieldState.invalid}
               helperText={fieldState.error?.message}
             />
@@ -43,7 +43,7 @@ export function PersonalInfoStep() {
               {...field}
               type="tel"
               icon={<Phone size={20} />}
-              label="Teléfono *"
+              label="Phone *"
               placeholder="3001234567"
               error={fieldState.invalid}
               helperText={fieldState.error?.message}
@@ -56,8 +56,8 @@ export function PersonalInfoStep() {
             <InputField
               {...field}
               icon={<MapPin size={20} />}
-              label="Dirección"
-              placeholder="Calle 123 # 45-67, Barrio, Ciudad"
+              label="Address"
+              placeholder="Street 123 # 45-67, Neighborhood, City"
               error={fieldState.invalid}
               helperText={fieldState.error?.message}
             />

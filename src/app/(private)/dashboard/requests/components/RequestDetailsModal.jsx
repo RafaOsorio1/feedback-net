@@ -26,36 +26,36 @@ import { useEffect, useState } from 'react';
 import { RequestStatus } from '../../../../core/constants/requestTypes';
 import RequestServices from '../../core/request.services';
 
-// Configuración de estados
+// Status configuration
 const statusConfig = {
   [RequestStatus.PENDING]: {
-    label: 'Pendiente',
+    label: 'Pending',
     color: 'blue',
     icon: <Clock className="w-3 h-3" />,
   },
   [RequestStatus.IN_PROGRESS]: {
-    label: 'En Progreso',
+    label: 'In Progress',
     color: 'yellow',
     icon: <Clock className="w-3 h-3" />,
   },
   [RequestStatus.RESOLVED]: {
-    label: 'Resuelto',
+    label: 'Resolved',
     color: 'green',
     icon: <CheckCircle className="w-3 h-3" />,
   },
   [RequestStatus.CANCELED]: {
-    label: 'Cancelado',
+    label: 'Canceled',
     color: 'red',
     icon: <X className="w-3 h-3" />,
   },
 };
 
-// Configuración de tipos
+// Type configuration
 const typeConfig = {
-  COMPLAINT: { label: 'Queja', color: 'red' },
-  REQUEST: { label: 'Petición', color: 'blue' },
-  CLAIM: { label: 'Reclamo', color: 'orange' },
-  SUGGESTION: { label: 'Sugerencia', color: 'green' },
+  COMPLAINT: { label: 'Complaint', color: 'red' },
+  REQUEST: { label: 'Petition', color: 'blue' },
+  CLAIM: { label: 'Claim', color: 'orange' },
+  SUGGESTION: { label: 'Suggestion', color: 'green' },
 };
 
 export function RequestDetailsModal() {
@@ -86,8 +86,6 @@ export function RequestDetailsModal() {
     enabled: !!requestId,
   });
 
-  console.log(requestQuery.data);
-
   if (requestQuery.isLoading) {
     return <SolicitudDetailsSkeleton />;
   }
@@ -110,7 +108,7 @@ export function RequestDetailsModal() {
           justify="between"
           className="p-4 border-b border-gray-200"
         >
-          <AlertDialog.Title>Detalles de la Solicitud</AlertDialog.Title>
+          <AlertDialog.Title>Request Details</AlertDialog.Title>
           <AlertDialog.Cancel>
             <Button variant="ghost" color="gray" size="2" radius="full">
               <X className="w-4 h-4" />
@@ -123,17 +121,17 @@ export function RequestDetailsModal() {
             {/* Información del Solicitante */}
             <div className="space-y-4">
               <Text as="div" size="3" weight="bold" className="text-gray-900">
-                Información del Solicitante
+                Requester Information
               </Text>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-center gap-2">
                   <User className="w-4 h-4 text-gray-500" />
                   <div>
                     <Text as="div" size="1" className="text-gray-500">
-                      Nombre completo
+                      Full name
                     </Text>
                     <Text as="div" size="2" className="font-medium">
-                      {request.fullName || 'No especificado'}
+                      {request.fullName || 'Not specified'}
                     </Text>
                   </div>
                 </div>
@@ -141,10 +139,10 @@ export function RequestDetailsModal() {
                   <Mail className="w-4 h-4 text-gray-500" />
                   <div>
                     <Text as="div" size="1" className="text-gray-500">
-                      Correo electrónico
+                      Email address
                     </Text>
                     <Text as="div" size="2" className="font-medium">
-                      {request.email || 'No especificado'}
+                      {request.email || 'Not specified'}
                     </Text>
                   </div>
                 </div>
@@ -152,10 +150,10 @@ export function RequestDetailsModal() {
                   <Phone className="w-4 h-4 text-gray-500" />
                   <div>
                     <Text as="div" size="1" className="text-gray-500">
-                      Teléfono
+                      Phone
                     </Text>
                     <Text as="div" size="2" className="font-medium">
-                      {request.phone || 'No especificado'}
+                      {request.phone || 'Not specified'}
                     </Text>
                   </div>
                 </div>
@@ -163,10 +161,10 @@ export function RequestDetailsModal() {
                   <MapPin className="w-4 h-4 text-gray-500" />
                   <div>
                     <Text as="div" size="1" className="text-gray-500">
-                      Dirección
+                      Address
                     </Text>
                     <Text as="div" size="2" className="font-medium">
-                      {request.address || 'No especificada'}
+                      {request.address || 'Not specified'}
                     </Text>
                   </div>
                 </div>
@@ -176,12 +174,12 @@ export function RequestDetailsModal() {
             {/* Información de la Solicitud */}
             <div className="space-y-4">
               <Text as="div" size="3" weight="bold" className="text-gray-900">
-                Detalles de la Solicitud
+                Request Details
               </Text>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Text as="div" size="1" className="text-gray-500 mb-1">
-                    Número de Radicado
+                    Reference Number
                   </Text>
                   <Text as="div" size="2" className="font-medium">
                     {request.referenceNumber || `PQR-${requestId}`}
@@ -189,15 +187,15 @@ export function RequestDetailsModal() {
                 </div>
                 <div>
                   <Text as="div" size="1" className="text-gray-500 mb-1">
-                    Asunto
+                    Subject
                   </Text>
                   <Text as="div" size="2" className="font-medium">
-                    {request.subject || 'Sin asunto'}
+                    {request.subject || 'No subject'}
                   </Text>
                 </div>
                 <div>
                   <Text as="div" size="1" className="text-gray-500 mb-1">
-                    Tipo de Solicitud
+                    Request Type
                   </Text>
                   <Badge color={typeConfigItem.color} size="1" radius="large">
                     {typeConfigItem.label}
@@ -205,7 +203,7 @@ export function RequestDetailsModal() {
                 </div>
                 <div>
                   <Text as="div" size="1" className="text-gray-500 mb-1">
-                    Estado
+                    Status
                   </Text>
                   <Badge
                     // @ts-ignore
@@ -220,22 +218,22 @@ export function RequestDetailsModal() {
                 </div>
                 <div>
                   <Text as="div" size="1" className="text-gray-500 mb-1">
-                    Fecha de Creación
+                    Creation Date
                   </Text>
                   <Text as="div" size="2" className="font-medium">
                     {DateTime.fromISO(request.createdAt)
-                      .setLocale('es')
+                      .setLocale('en')
                       .toFormat('dd/MM/yyyy HH:mm')}
                   </Text>
                 </div>
                 {request.updatedAt && (
                   <div>
                     <Text as="div" size="1" className="text-gray-500 mb-1">
-                      Última actualización
+                      Last update
                     </Text>
                     <Text as="div" size="2" className="font-medium">
                       {DateTime.fromISO(request.updatedAt)
-                        .setLocale('es')
+                        .setLocale('en')
                         .toFormat('dd/MM/yyyy HH:mm')}
                     </Text>
                   </div>
@@ -244,11 +242,11 @@ export function RequestDetailsModal() {
 
               <div className="space-y-2">
                 <Text as="div" size="1" className="text-gray-500">
-                  Descripción detallada
+                  Detailed description
                 </Text>
                 <div className="p-3 bg-gray-50 rounded-md border border-gray-200">
                   <Text as="p" size="2" className="whitespace-pre-line">
-                    {request.details || 'No se proporcionó una descripción.'}
+                    {request.details || 'No description provided.'}
                   </Text>
                 </div>
               </div>
@@ -259,12 +257,12 @@ export function RequestDetailsModal() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <Text as="div" size="3" weight="bold" className="text-gray-900">
-                  Historial de Respuestas
+                  Response History
                 </Text>
                 <Badge variant="soft" color="gray">
                   {hasResponses
-                    ? `${request.responses.length} respuesta(s)`
-                    : 'Sin respuestas'}
+                    ? `${request.responses.length} response(s)`
+                    : 'No responses'}
                 </Badge>
               </div>
 
@@ -285,14 +283,14 @@ export function RequestDetailsModal() {
                           >
                             {response.isp?.name ||
                               response.employee?.name ||
-                              'Soporte'}
+                              'Support'}
                           </Text>
                           <Text as="div" size="1" className="text-gray-500">
                             {DateTime.fromISO(response.createdAt)
-                              .setLocale('es')
-                              .toFormat("dd 'de' MMMM 'de' yyyy 'a las' HH:mm")}
+                              .setLocale('en')
+                              .toFormat("MMMM dd, yyyy 'at' HH:mm")}
                             {response.updatedAt !== response.createdAt &&
-                              ' (editado)'}
+                              ' (edited)'}
                           </Text>
                         </div>
                         {response.isp?.logo && (
@@ -326,10 +324,10 @@ export function RequestDetailsModal() {
               {/* Formulario de respuesta */}
               <div className="space-y-3 mt-6">
                 <Text as="div" size="3" weight="bold" className="text-gray-900">
-                  Responder a esta solicitud
+                  Respond to this request
                 </Text>
                 <TextArea
-                  placeholder="Escribe tu respuesta aquí..."
+                  placeholder="Write your response here..."
                   className="min-h-[120px] w-full"
                 />
                 <div className="flex justify-end gap-3 pt-2">
@@ -338,9 +336,9 @@ export function RequestDetailsModal() {
                     color="gray"
                     onClick={() => handleOpenChange(false)}
                   >
-                    Cancelar
+                    Cancel
                   </Button>
-                  <Button>Enviar respuesta</Button>
+                  <Button>Send response</Button>
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@ export function FormFooter({ isSubmitting }) {
       <CustomButton
         type="submit"
         Icon={<Send size={20} />}
-        text={isSubmitting ? 'Enviando...' : 'Enviar Solicitud PQR/S'}
+        text={isSubmitting ? 'Sending...' : 'Submit PQR/S Request'}
         size="4"
         disabled={isSubmitting}
       />

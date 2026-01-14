@@ -15,7 +15,7 @@ export function RequestTypeStep() {
 
   return (
     <section>
-      <h4 className="font-semibold text-2xl mb-4">Tipo de Solicitud *</h4>
+      <h4 className="font-semibold text-2xl mb-4">Request Type *</h4>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {Object.values(RequestType).map((type) => (
           <Card

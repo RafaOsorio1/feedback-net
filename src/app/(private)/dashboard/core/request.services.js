@@ -12,4 +12,11 @@ export default class RequestServices extends WebHttpClient {
     );
     return response.json();
   }
+
+  static async createResponse({ content, requestId, ispId }) {
+    const response = await WebHttpClient.client.post(`api/response`, {
+      json: { content, ispId, requestId },
+    });
+    return response.json();
+  }
 }

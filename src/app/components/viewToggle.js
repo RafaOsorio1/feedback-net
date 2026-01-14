@@ -18,7 +18,7 @@ export function ViewToggle() {
             }`}
           >
             <FilePen />
-            Enviar Nueva Solicitud
+            Submit New Request
           </button>
           <button
             onClick={() => setInitialView('tracker')}
@@ -29,7 +29,7 @@ export function ViewToggle() {
             }`}
           >
             <Search />
-            Consultar Estado
+            Track Status
           </button>
         </div>
       </div>
