@@ -77,22 +77,22 @@ const statusConfig: Record<
   RequestStatusValue,
   { label: string; color: any; icon: React.ReactNode }
 > = {
-  [RequestStatus.PENDING]: {
+  PENDING: {
     label: 'Pending',
     color: 'blue',
     icon: <Clock className="w-3 h-3" />,
   },
-  [RequestStatus.IN_PROGRESS]: {
+  IN_PROGRESS: {
     label: 'In Progress',
     color: 'yellow',
     icon: <Clock className="w-3 h-3" />,
   },
-  [RequestStatus.RESOLVED]: {
+  RESOLVED: {
     label: 'Resolved',
     color: 'green',
     icon: <CheckCircle className="w-3 h-3" />,
   },
-  [RequestStatus.CANCELED]: {
+  CANCELED: {
     label: 'Canceled',
     color: 'red',
     icon: <XCircle className="w-3 h-3" />,

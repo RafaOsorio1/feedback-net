@@ -13,17 +13,17 @@ export const RequestType: Record<string, RequestTypeValue> = {
 };
 
 export const RequestTypeLabels: Record<RequestTypeValue, string> = {
-  [RequestType.PETITION]: 'Petition',
-  [RequestType.COMPLAINT]: 'Complaint',
-  [RequestType.CLAIM]: 'Claim',
-  [RequestType.SUGGESTION]: 'Suggestion',
+  PETITION: 'Petition',
+  COMPLAINT: 'Complaint',
+  CLAIM: 'Claim',
+  SUGGESTION: 'Suggestion',
 };
 
 export const RequestTypeDescriptions: Record<RequestTypeValue, string> = {
-  [RequestType.PETITION]: 'Request for information, services or procedures',
-  [RequestType.COMPLAINT]: 'Expression of dissatisfaction with a service',
-  [RequestType.CLAIM]: 'Request for correction or compensation',
-  [RequestType.SUGGESTION]: 'Improvement proposal or recommendation',
+  PETITION: 'Request for information, services or procedures',
+  COMPLAINT: 'Expression of dissatisfaction with a service',
+  CLAIM: 'Request for correction or compensation',
+  SUGGESTION: 'Improvement proposal or recommendation',
 };
 
 export type RequestStatusValue =
