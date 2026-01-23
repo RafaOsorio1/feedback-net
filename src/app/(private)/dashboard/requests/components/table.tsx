@@ -10,47 +10,18 @@ import {
   ArrowDown,
   ArrowUp,
   ArrowUpDown,
-  CheckCircle,
-  Clock,
   Eye,
   MessageSquare,
-  XCircle,
 } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react';
 
 import {
   RequestStatus,
   RequestStatusValue,
 } from '../../../../core/constants/requestTypes';
 import { RequestDetail } from '../../../../core/types';
-
-const statusConfig: Record<
-  RequestStatusValue,
-  { label: string; color: any; icon: React.ReactNode }
-> = {
-  [RequestStatus.PENDING]: {
-    label: 'Pending',
-    color: 'blue',
-    icon: <Clock className="w-3 h-3" />,
-  },
-  [RequestStatus.IN_PROGRESS]: {
-    label: 'In Progress',
-    color: 'yellow',
-    icon: <Clock className="w-3 h-3" />,
-  },
-  [RequestStatus.RESOLVED]: {
-    label: 'Resolved',
-    color: 'green',
-    icon: <CheckCircle className="w-3 h-3" />,
-  },
-  [RequestStatus.CANCELED]: {
-    label: 'Canceled',
-    color: 'red',
-    icon: <XCircle className="w-3 h-3" />,
-  },
-};
+import { statusConfig } from '../../components/RecentActivity';
 
 const typeConfig: Record<string, { label: string; color: any }> = {
   COMPLAINT: {

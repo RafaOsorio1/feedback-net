@@ -3,6 +3,9 @@ import ky from 'ky';
 import { env } from '../env/client';
 
 export class WebHttpClient {
+  constructor() {
+    console.log(env.NEXT_PUBLIC_API_URL);
+  }
   static publicClient = ky.extend({
     prefixUrl: env.NEXT_PUBLIC_API_URL,
   });

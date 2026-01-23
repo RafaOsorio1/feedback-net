@@ -2,16 +2,23 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
-import { Fragment } from 'react';
+import { connection } from 'next/server';
+import { Fragment, Suspense } from 'react';
 import { CustomButton } from '../../../components/trackerForm';
 import { useAuth } from '../../../core/AuthContext/context';
 import { Modal } from '../components/modal';
 import RequestServices from '../core/request.services';
-import { RequestDetailsModal } from './components/RequestDetailsModal';
+import {
+  RequestDetailsModal,
+  RequestDetailsSkeleton,
+} from './components/RequestDetailsModal';
 import { ResponseModal } from './components/responseModal';
 import { RequestsTable } from './components/table';
 
-export default function RequestPage() {
+//how is this working?!!!
+
+export default async function RequestPage() {
+  await connection();
   const { isp } = useAuth();
   const requestQuery = useQuery({
     queryKey: ['request', isp?.id || ''],
@@ -44,7 +51,9 @@ export default function RequestPage() {
       </section>
 
       {/* Request Details Modal */}
-      <RequestDetailsModal />
+      <Suspense fallback={<RequestDetailsSkeleton />}>
+        <RequestDetailsModal />
+      </Suspense>
       <ResponseModal />
     </Fragment>
   );

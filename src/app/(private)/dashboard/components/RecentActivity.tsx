@@ -73,7 +73,7 @@ export function Pqrs({
   );
 }
 
-const statusConfig: Record<
+export const statusConfig: Record<
   RequestStatusValue,
   { label: string; color: any; icon: React.ReactNode }
 > = {

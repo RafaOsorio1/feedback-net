@@ -10,51 +10,16 @@ import {
   TextArea,
 } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
-import {
-  CheckCircle,
-  Clock,
-  Mail,
-  MapPin,
-  MessageSquare,
-  Phone,
-  User,
-  X,
-} from 'lucide-react';
+import { Mail, MapPin, MessageSquare, Phone, User, X } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   RequestStatus,
   RequestStatusValue,
 } from '../../../../core/constants/requestTypes';
+import { statusConfig } from '../../components/RecentActivity';
 import RequestServices from '../../core/request.services';
-
-// Status configuration
-const statusConfig: Record<
-  RequestStatusValue,
-  { label: string; color: any; icon: React.ReactNode }
-> = {
-  [RequestStatus.PENDING]: {
-    label: 'Pending',
-    color: 'blue',
-    icon: <Clock className="w-3 h-3" />,
-  },
-  [RequestStatus.IN_PROGRESS]: {
-    label: 'In Progress',
-    color: 'yellow',
-    icon: <Clock className="w-3 h-3" />,
-  },
-  [RequestStatus.RESOLVED]: {
-    label: 'Resolved',
-    color: 'green',
-    icon: <CheckCircle className="w-3 h-3" />,
-  },
-  [RequestStatus.CANCELED]: {
-    label: 'Canceled',
-    color: 'red',
-    icon: <X className="w-3 h-3" />,
-  },
-};
 
 // Type configuration
 const typeConfig: Record<string, { label: string; color: any }> = {

@@ -3,18 +3,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Badge } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
-import {
-  CheckCircle,
-  Clock,
-  MessageSquare,
-  Search,
-  User,
-  X,
-} from 'lucide-react';
+import { MessageSquare, Search, User } from 'lucide-react';
 import { DateTime } from 'luxon';
-import React, { Fragment, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { statusConfig } from '../../(private)/dashboard/components/RecentActivity';
 import RequestServices from '../../(private)/dashboard/core/request.services';
 import { InputField } from '../../components/input';
 import { CustomButton, TrackerForm } from '../../components/trackerForm';
@@ -37,32 +31,6 @@ type FormData = z.infer<typeof schema>;
 export default function Home() {
   const { initialView } = useStore();
   const [cunValue, setCunValue] = useState<string | null>(null);
-
-  const statusConfig: Record<
-    string,
-    { label: string; color: any; icon: React.ReactNode }
-  > = {
-    PENDING: {
-      label: 'Pending',
-      color: 'blue',
-      icon: <Clock className="w-3 h-3" />,
-    },
-    IN_PROGRESS: {
-      label: 'In Progress',
-      color: 'yellow',
-      icon: <Clock className="w-3 h-3" />,
-    },
-    RESOLVED: {
-      label: 'Resolved',
-      color: 'green',
-      icon: <CheckCircle className="w-3 h-3" />,
-    },
-    CANCELED: {
-      label: 'Canceled',
-      color: 'red',
-      icon: <X className="w-3 h-3" />,
-    },
-  };
 
   const typeConfig: Record<string, { label: string; color: any }> = {
     COMPLAINT: { label: 'Complaint', color: 'red' },
