@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚀 Feedback System - Frontend Web App
 
-## Getting Started
+Welcome to the **Feedback System Frontend**! A high-performance, responsive, and intuitive web application designed to manage customer feedback and service requests for ISPs. Built with a modern tech stack and optimized for a seamless administrative experience.
 
-First, run the development server:
+---
+
+## 🛠 Tech Stack
+
+We use a premium selection of technologies to ensure speed, type-safety, and a modern developer experience:
+
+- **Framework:** [Next.js](https://nextjs.org/) ⚡ (App Router & Server Components)
+- **Language:** [TypeScript](https://www.typescriptlang.org/) 💙 (Strictly typed)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) 🎨 (Utility-first styling)
+- **UI Components:** [Radix UI Themes](https://www.radix-ui.com/themes) 🧩 (Accessible components)
+- **State Management:** [Zustand](https://zustand-demo.pmnd.rs/) 🐻 (Scalable state)
+- **Data Fetching:** [TanStack Query v5](https://tanstack.com/query/latest) 🔄 (Server state management)
+- **HTTP Client:** [Ky](https://github.com/sindresorhus/ky) 🏎 (Modern fetch wrapper)
+- **Validation:** [Zod](https://zod.dev/) ✅ (Schema validation)
+- **Forms:** [React Hook Form](https://react-hook-form.com/) 📝 (Performant forms)
+- **Icons:** [Lucide React](https://lucide.dev/) ✨
+
+---
+
+## ✨ Features
+
+- 👤 **Employee Dashboard:** Specialized views for managing customer feedback and requests.
+- 📩 **Request Tracking:** Real-time monitoring and handling of petitions, complaints, and suggestions.
+- 📊 **Analytics & Reports:** Visualized data insights for ISP performance and response times.
+- 🔐 **Secure Access:** Robust authentication flow with JWT-based sessions.
+- 📱 **Fully Responsive:** Optimized experience across desktops, tablets, and mobile devices.
+- 🎨 **Premium UI:** Polished interface using Radix UI and Tailwind CSS for a professional look.
+
+---
+
+## 🚦 Getting Started
+
+### 📋 Prerequisites
+
+- **Node.js 20+**
+- **PNPM** (highly recommended) or NPM.
+
+### ⚙️ Installation & Configuration
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone <your-repo-url>
+   cd feedback-net
+   ```
+
+2. **Setup environment variables:**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   > 💡 _Make sure to define `NEXT_PUBLIC_API_URL` to point to your backend service!_
+
+3. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+---
+
+## 👨‍💻 Development
+
+### Run in Dev Mode ⚡
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will start at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Build & Production 🚢
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm build
+pnpm start
+```
 
-## Learn More
+### Code Quality
 
-To learn more about Next.js, take a look at the following resources:
+- ✨ **Linting:** `pnpm lint`
+- 🎨 **Formatting:** `pnpm format`
+- 🛡 **Type Check:** `pnpm check-types`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+```text
+src/
+ ├── app/           # Next.js App Router (Layouts, Pages, Providers)
+ │    ├── (private) # Authenticated routes (Dashboard, Requests, Analytics)
+ │    ├── (public)  # Guest routes (Home, Login, Register)
+ │    ├── core      # Shared logic: hooks, services, stores, and types
+ │    └── components# App-specific shared components
+ ├── components/    # Reusable UI primitives and global components
+ ├── lib/           # Utility libraries (API clients, shared helpers)
+ └── providers/     # React Context and Global Providers
+public/             # Static assets (images, icons, etc.)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛡 License
+
+This project is licensed under the **ISC License**.
+
+Developed with ❤️ by the Feedback Team.
