@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 import { AuthContext } from '../../../../core/AuthContext/context';
 import AuthService from '../../../../core/services/auth/services';
-import { setToken } from '../../../../lib/setToken';
+import { setIspData, setToken } from '../../../../lib/setToken';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -47,6 +47,7 @@ export function useLoginForm() {
 
       if (data.isp) {
         setIsp(data.isp);
+        setIspData(data.isp);
       }
 
       router.push('/dashboard');

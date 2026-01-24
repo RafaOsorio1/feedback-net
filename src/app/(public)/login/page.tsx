@@ -94,7 +94,7 @@ export default function LoginPage() {
 
         <div className="bg-gray-100 rounded-lg p-4 mt-6 mb-7">
           <p className="font-semibold text-base mb-2">Demo credentials:</p>
-          <p className="text-sm">Email: contacto@hiperconexion.com</p>
+          <p className="text-sm">Email: contacto@redveloz.com</p>
           <p className="text-sm">Password: password123</p>
         </div>
 

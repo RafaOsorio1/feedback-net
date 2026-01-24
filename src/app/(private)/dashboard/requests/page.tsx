@@ -1,32 +1,39 @@
-'use client';
-
-import { useQuery } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { connection } from 'next/server';
 import { Fragment, Suspense } from 'react';
 import { CustomButton } from '../../../components/trackerForm';
-import { useAuth } from '../../../core/AuthContext/context';
 import { Modal } from '../components/modal';
-import RequestServices from '../core/request.services';
 import {
   RequestDetailsModal,
   RequestDetailsSkeleton,
 } from './components/RequestDetailsModal';
 import { ResponseModal } from './components/responseModal';
 import { RequestsTable } from './components/table';
+import SsrRequestServices from './core/ssrServices';
 
 //how is this working?!!!
 
 export default async function RequestPage() {
   await connection();
-  const { isp } = useAuth();
-  const requestQuery = useQuery({
-    queryKey: ['request', isp?.id || ''],
-    queryFn: () => RequestServices.getRequests(isp?.id!),
-    enabled: !!isp?.id,
-  });
 
-  const tableData = requestQuery.data?.data || [];
+  const cookieStore = await cookies();
+  const ispCookie = cookieStore.get('isp')?.value;
+
+  if (!ispCookie) {
+    redirect('/login');
+  }
+
+  let ispId = '';
+  try {
+    const isp = JSON.parse(ispCookie);
+    ispId = isp.id;
+  } catch {
+    ispId = ispCookie;
+  }
+
+  const tableData = (await SsrRequestServices.getRequests(ispId)).data;
 
   return (
     <Fragment>

@@ -48,10 +48,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return initialIsp;
   });
 
-  // Update localStorage when isp changes
+  // Update localStorage and cookies when isp changes
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && isp.id) {
       localStorage.setItem(ISP_STORAGE_KEY, JSON.stringify(isp));
+      // También guardamos en cookie para el SSR
+      document.cookie = `isp=${JSON.stringify(isp)}; path=/; max-age=86400; SameSite=Lax; Secure`;
     }
   }, [isp]);
 
@@ -66,6 +68,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const clearIsp = () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem(ISP_STORAGE_KEY);
+      document.cookie = 'isp=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
     }
     setIspState(initialIsp);
   };
