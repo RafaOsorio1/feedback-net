@@ -10,7 +10,7 @@ export default class RequestServices extends WebHttpClient {
     ispId: string,
   ): Promise<ApiResponse<RequestDetail[]>> {
     const response = await WebHttpClient.client.get(`api/request/${ispId}`);
-    return response.json();
+    return response.json<ApiResponse<RequestDetail[]>>();
   }
 
   static async getRequestById(
