@@ -19,7 +19,7 @@ export default function UsersPage() {
   const [selectedUser, setSelectedUser] = useState<Employee | null>(null);
 
   // Fetch Employees
-  const { data: employeesData, isLoading } = useQuery({
+  const { data: employeesData } = useQuery({
     queryKey: ['employees', isp?.id],
     queryFn: () => EmployeeServices.getEmployees(isp?.id || ''),
     enabled: !!isp?.id,
