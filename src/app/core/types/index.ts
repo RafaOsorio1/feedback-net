@@ -15,6 +15,27 @@ export interface ISP {
   updatedAt: string;
 }
 
+export enum EmployeeRole {
+  ADMIN = 'ADMIN',
+  EMPLOYEE = 'EMPLOYEE',
+}
+
+export enum EmployeeStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}
+
+export interface Employee {
+  id: string;
+  name: string;
+  email: string;
+  role: EmployeeRole;
+  status: EmployeeStatus;
+  ispId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface ApiResponse<T> {
   data: T;
   message?: string;
