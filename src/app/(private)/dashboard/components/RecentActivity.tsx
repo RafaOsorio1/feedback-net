@@ -73,10 +73,7 @@ export function Pqrs({
   );
 }
 
-export const statusConfig: Record<
-  RequestStatusValue,
-  { label: string; color: any; icon: React.ReactNode }
-> = {
+export const statusConfig = {
   PENDING: {
     label: 'Pending',
     color: 'blue',
@@ -97,7 +94,7 @@ export const statusConfig: Record<
     color: 'red',
     icon: <XCircle className="w-3 h-3" />,
   },
-};
+} as Record<RequestStatusValue, { label: string; color: any; icon: React.ReactNode }>;
 
 export function StatusBadge({ status }: { status: RequestStatusValue }) {
   const config =
